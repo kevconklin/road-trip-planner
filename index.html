@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conklin Family Road Trip — Lawrence, MI to Boston, MA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy-950: #020617;
+    --amber-50: #fffbeb;
+    --amber-100-60: rgba(254, 243, 199, 0.6);
+    --amber-100-30: rgba(254, 243, 199, 0.3);
+    --amber-100-20: rgba(254, 243, 199, 0.2);
+    --sunset-300: #fdba74;
+    --sunset-400: #fb923c;
+    --sunset-500: #f97316;
+    --sunset-600: #ea580c;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    background-color: var(--navy-950);
+    color: var(--amber-50);
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  ::selection { background: rgba(249, 115, 22, 0.3); }
+
+  .font-heading { font-family: 'Outfit', sans-serif; }
+
+  /* Global background glow */
+  .bg-glow {
+    position: absolute; top: 0; left: 0; width: 100%; height: 600px;
+    background: rgba(234, 88, 12, 0.1);
+    filter: blur(150px);
+    pointer-events: none;
+    border-radius: 0 0 50% 50%;
+  }
+
+  /* Subtle dot pattern */
+  .dot-pattern {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    opacity: 0.02;
+    background-image: radial-gradient(#fef3c7 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .container {
+    position: relative; z-index: 10;
+    max-width: 1200px; margin: 0 auto; padding: 0 1rem;
+  }
+
+  /* ---- Hero Section ---- */
+  .hero {
+    position: relative;
+    padding: 8rem 1.5rem 6rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-route-bg {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none; opacity: 0.3;
+  }
+
+  .hero-route-bg svg { width: 100%; height: 100%; max-width: 72rem; }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: 9999px;
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    color: var(--sunset-400);
+    font-weight: 500; font-size: 0.75rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    backdrop-filter: blur(8px);
+    margin-bottom: 2.5rem;
+    opacity: 0; animation: fadeInScale 0.6s ease-out 0.1s forwards;
+  }
+
+  .badge svg { width: 16px; height: 16px; animation: pulse 2s infinite; }
+
+  .hero h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    font-weight: 700;
+    color: var(--amber-50);
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    opacity: 0; animation: fadeInUp 0.7s ease-out 0.2s forwards;
+  }
+
+  .hero h1 .gradient-text {
+    background: linear-gradient(to right, var(--sunset-300), var(--sunset-500), var(--sunset-600));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero .subtitle {
+    font-size: clamp(1.1rem, 3vw, 1.75rem);
+    color: rgba(254, 243, 199, 0.7);
+    font-weight: 300;
+    display: flex; flex-wrap: wrap;
+    align-items: center; justify-content: center; gap: 0.75rem;
+    opacity: 0; animation: fadeInUp 0.7s ease-out 0.3s forwards;
+  }
+
+  .subtitle .arrow { color: rgba(249, 115, 22, 0.7); }
+  .subtitle .via { color: rgba(249, 115, 22, 0.4); font-style: italic; font-size: 0.85em; }
+
+  /* ---- Cards Grid ---- */
+  .cards-grid {
+    max-width: 64rem; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr;
+    gap: 1.5rem; padding: 0 1rem 6rem;
+  }
+
+  @media (min-width: 768px) {
+    .cards-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .hero { padding-top: 10rem; padding-bottom: 8rem; }
+  }
+
+  .card-wrapper {
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .card-wrapper:nth-child(1) { animation: fadeInUp 0.7s ease-out 0.4s forwards; }
+  .card-wrapper:nth-child(2) { animation: fadeInUp 0.7s ease-out 0.6s forwards; }
+
+  .card-glow {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.2), transparent);
+    border-radius: 1.5rem;
+    filter: blur(20px);
+    opacity: 0;
+    transition: all 0.5s ease;
+    pointer-events: none;
+  }
+
+  .card-wrapper:hover .card-glow {
+    opacity: 1; filter: blur(30px);
+  }
+
+  .card {
+    position: relative; display: block; height: 100%;
+    padding: 2rem 2rem;
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-decoration: none; color: inherit;
+    transition: all 0.5s ease;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .card { padding: 2.5rem; }
+  }
+
+  .card:hover {
+    border-color: rgba(249, 115, 22, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  .card-accent {
+    position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+    background: linear-gradient(to right, var(--sunset-400), var(--sunset-600));
+    opacity: 0; transition: opacity 0.5s ease;
+  }
+
+  .card:hover .card-accent { opacity: 1; }
+
+  .card-icon {
+    width: 4rem; height: 4rem;
+    border-radius: 1rem;
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 2rem;
+    transition: all 0.5s ease;
+    box-shadow: inset 0 1px 4px rgba(251, 146, 60, 0.1);
+  }
+
+  .card:hover .card-icon {
+    background: rgba(249, 115, 22, 0.2);
+    transform: scale(1.1);
+  }
+
+  .card-icon svg { width: 2rem; height: 2rem; color: var(--sunset-400); }
+
+  .card h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem; font-weight: 600;
+    color: var(--amber-50);
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+  }
+
+  @media (min-width: 768px) { .card h3 { font-size: 1.75rem; } }
+
+  .card:hover h3 { color: #ffffff; }
+
+  .card p {
+    color: var(--amber-100-60);
+    line-height: 1.7; font-weight: 300; font-size: 1.1rem;
+  }
+
+  /* ---- Footer ---- */
+  footer {
+    padding: 3rem 0; text-align: center;
+    color: var(--amber-100-30); font-size: 0.875rem;
+    position: relative; z-index: 10;
+  }
+
+  .footer-inner {
+    display: flex; align-items: center; justify-content: center; gap: 1.5rem;
+  }
+
+  .footer-line {
+    width: 4rem; height: 1px;
+    background: linear-gradient(to right, transparent, var(--amber-100-20));
+  }
+
+  .footer-line:last-child {
+    background: linear-gradient(to left, transparent, var(--amber-100-20));
+  }
+
+  .footer-text {
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    font-size: 0.75rem; font-weight: 500;
+  }
+
+  /* ---- Animations ---- */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  @keyframes drawRoute {
+    from { stroke-dashoffset: 1200; }
+    to { stroke-dashoffset: 0; }
+  }
+
+  .route-path {
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    animation: drawRoute 2s ease-in-out 0.5s forwards;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+  <div class="dot-pattern"></div>
+
+  <div class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-route-bg">
+        <svg viewBox="0 0 1000 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="route-path"
+            d="M -100 250 C 200 250, 300 50, 500 150 C 700 250, 800 50, 1100 50"
+            stroke="url(#routeGradient)" stroke-width="3" stroke-dasharray="8 8" />
+          <defs>
+            <linearGradient id="routeGradient" x1="0" y1="250" x2="1000" y2="50" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#f59e0b" stop-opacity="0" />
+              <stop offset="0.5" stop-color="#ea580c" stop-opacity="1" />
+              <stop offset="1" stop-color="#f59e0b" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <div style="position:relative;z-index:10;max-width:56rem;margin:0 auto;">
+        <div class="badge">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          The Great Northern Adventure
+        </div>
+
+        <h1>
+          Conklin Family<br>
+          <span class="gradient-text">Road Trip</span>
+        </h1>
+
+        <p class="subtitle">
+          <span>Lawrence, MI</span>
+          <span class="arrow">&rarr;</span>
+          <span>Boston, MA</span>
+          <span class="via">via</span>
+          <span>Canada</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Cards -->
+    <div class="cards-grid">
+      <div class="card-wrapper">
+        <div class="card-glow"></div>
+        <a href="costco-gas-road-trip.html" class="card">
+          <div class="card-accent"></div>
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="5" y2="22"/><line x1="19" y1="22" x2="21" y2="22"/><path d="M5 22V4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v18"/><path d="M15 10h4a2 2 0 0 1 2 2v10"/><path d="M10 6h0"/><path d="M10 10h0"/><path d="M10 14h0"/></svg>
+          </div>
+          <h3>Costco Fuel Stop Planner</h3>
+          <p>10 Costco gas stations mapped along the route with distances, drive times, and border crossing info.</p>
+        </a>
+      </div>
+
+      <div class="card-wrapper">
+        <div class="card-glow"></div>
+        <a href="family-road-trip-guide.html" class="card">
+          <div class="card-accent"></div>
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          </div>
+          <h3>Family Trip Guide</h3>
+          <p>Day-by-day itinerary, packing checklist, car entertainment ideas, and border crossing tips for the kids.</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-line"></div>
+        <span class="footer-text">April 2026</span>
+        <div class="footer-line"></div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

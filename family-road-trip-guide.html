@@ -4,159 +4,355 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Family Road Trip Guide — Lawrence, MI to Boston, MA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --blue: #1a5276;
-    --blue-light: #2980b9;
-    --green: #27ae60;
-    --orange: #e67e22;
-    --red: #c0392b;
-    --purple: #8e44ad;
-    --teal: #16a085;
-    --bg: #fafbfc;
-    --card: #ffffff;
-    --border: #e0e0e0;
-    --text: #2c3e50;
-    --text-light: #6c757d;
-    --shadow: 0 2px 8px rgba(0,0,0,0.07);
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  /* NAV TABS */
+  :root {
+    --navy-950: #020617;
+    --navy-900: #0f172a;
+    --navy-800: #1e293b;
+    --navy-700: #334155;
+    --amber-50: #fffbeb;
+    --amber-100: #fef3c7;
+    --sunset-300: #fdba74;
+    --sunset-400: #fb923c;
+    --sunset-500: #f97316;
+    --sunset-600: #ea580c;
+    --green-400: #4ade80;
+    --green-500: #22c55e;
+    --red-400: #f87171;
+    --red-500: #ef4444;
+    --yellow-400: #facc15;
+    --yellow-500: #eab308;
+    --blue-400: #60a5fa;
+    --purple-400: #c084fc;
+    --purple-500: #a855f7;
+    --teal-400: #2dd4bf;
+    --teal-500: #14b8a6;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    background-color: var(--navy-950);
+    color: var(--amber-50);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  ::selection { background: rgba(249, 115, 22, 0.3); }
+  .font-heading { font-family: 'Outfit', sans-serif; }
+
+  /* Background effects */
+  .bg-glow {
+    position: absolute; top: 0; left: 0; width: 100%; height: 500px;
+    background: rgba(234, 88, 12, 0.08);
+    filter: blur(150px); pointer-events: none; border-radius: 0 0 50% 50%;
+  }
+  .dot-pattern {
+    position: fixed; inset: 0; pointer-events: none; opacity: 0.02;
+    background-image: radial-gradient(#fef3c7 1px, transparent 1px);
+    background-size: 40px 40px; z-index: 0;
+  }
+
+  /* Back link */
+  .back-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    color: rgba(254, 243, 199, 0.5); text-decoration: none;
+    font-size: 0.85rem; padding: 1.5rem 0 0;
+    transition: color 0.3s;
+  }
+  .back-link:hover { color: var(--sunset-400); }
+
+  /* Header */
+  .header {
+    position: relative; text-align: center;
+    padding: 3rem 1.5rem 2.5rem; overflow: hidden;
+    opacity: 0; animation: fadeInUp 0.7s ease-out forwards;
+  }
+  .header h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    font-weight: 700; margin-bottom: 0.3rem;
+    background: linear-gradient(to right, var(--sunset-300), var(--sunset-500));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .header p { color: rgba(254, 243, 199, 0.6); font-size: 1rem; }
+
+  /* TAB BAR */
   .tab-bar {
     position: sticky; top: 0; z-index: 100;
-    background: var(--blue); display: flex; justify-content: center;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    display: flex; justify-content: center; gap: 0.25rem;
+    padding: 0.5rem;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    opacity: 0; animation: fadeInUp 0.7s ease-out 0.15s forwards;
   }
   .tab-btn {
-    background: none; border: none; color: rgba(255,255,255,0.7);
-    padding: 1rem 1.5rem; font-size: 0.9rem; font-weight: 600;
-    cursor: pointer; transition: all 0.2s; border-bottom: 3px solid transparent;
-    font-family: inherit;
+    background: none; border: none;
+    color: rgba(254, 243, 199, 0.45);
+    padding: 0.75rem 1.25rem; font-size: 0.85rem; font-weight: 600;
+    cursor: pointer; transition: all 0.3s;
+    border-radius: 8px;
+    font-family: 'Inter', system-ui, sans-serif;
+    letter-spacing: 0.02em;
   }
-  .tab-btn:hover { color: white; background: rgba(255,255,255,0.08); }
-  .tab-btn.active { color: white; border-bottom-color: var(--orange); }
+  .tab-btn:hover {
+    color: rgba(254, 243, 199, 0.8);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .tab-btn.active {
+    color: var(--sunset-400);
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+  }
 
   .tab-content { display: none; }
   .tab-content.active { display: block; }
 
-  .container { max-width: 850px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+  .container { max-width: 820px; margin: 0 auto; padding: 0 1rem 3rem; position: relative; z-index: 1; }
 
-  h1 { font-size: 1.7rem; color: var(--blue); text-align: center; margin: 1.5rem 0 0.3rem; }
-  .page-sub { text-align: center; color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.95rem; }
+  /* Section headings */
+  h1.section-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1.4rem, 4vw, 1.8rem);
+    font-weight: 700; text-align: center;
+    margin: 2rem 0 0.3rem;
+    background: linear-gradient(to right, var(--sunset-300), var(--sunset-500));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .page-sub {
+    text-align: center; color: rgba(254, 243, 199, 0.5);
+    margin-bottom: 1.5rem; font-size: 0.9rem;
+  }
 
   h2 {
-    font-size: 1.2rem; color: white; padding: 0.7rem 1rem;
-    border-radius: 8px; margin: 1.5rem 0 1rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem; font-weight: 600;
+    padding: 0.7rem 1rem; border-radius: 10px;
+    margin: 1.5rem 0 1rem;
   }
-  h2.day1 { background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%); }
-  h2.day2 { background: linear-gradient(135deg, var(--teal) 0%, var(--green) 100%); }
-  h2.section { background: linear-gradient(135deg, var(--orange) 0%, #d35400 100%); }
-  h2.checklist-head { background: linear-gradient(135deg, var(--purple) 0%, #6c3483 100%); }
-  h2.entertainment { background: linear-gradient(135deg, var(--green) 0%, var(--teal) 100%); }
+  h2.day1 {
+    background: rgba(96, 165, 250, 0.1);
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    color: var(--blue-400);
+  }
+  h2.day2 {
+    background: rgba(45, 212, 191, 0.1);
+    border: 1px solid rgba(45, 212, 191, 0.2);
+    color: var(--teal-400);
+  }
+  h2.section {
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    color: var(--sunset-400);
+  }
+  h2.checklist-head {
+    background: rgba(192, 132, 252, 0.1);
+    border: 1px solid rgba(192, 132, 252, 0.2);
+    color: var(--purple-400);
+  }
+  h2.entertainment {
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.2);
+    color: var(--green-400);
+  }
 
   /* ITINERARY CARDS */
   .stop-card {
-    background: var(--card); border-radius: 10px; border: 1px solid var(--border);
-    box-shadow: var(--shadow); margin-bottom: 1rem; overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 0; overflow: hidden;
+    transition: all 0.3s ease; cursor: pointer;
+  }
+  .stop-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(249, 115, 22, 0.2);
   }
   .stop-card-header {
     display: flex; align-items: center; gap: 0.8rem;
-    padding: 0.9rem 1.1rem; cursor: pointer;
+    padding: 1rem 1.2rem;
+    transition: background 0.2s;
   }
-  .stop-card-header:hover { background: #f7fafc; }
+  .stop-card-header:hover { background: rgba(255, 255, 255, 0.03); }
+
   .stop-icon {
-    width: 38px; height: 38px; border-radius: 50%; display: flex;
-    align-items: center; justify-content: center; font-size: 1.1rem;
+    width: 36px; height: 36px; border-radius: 50%; display: flex;
+    align-items: center; justify-content: center; font-size: 1rem;
     flex-shrink: 0; color: white;
   }
-  .stop-icon.drive { background: var(--text-light); font-size: 0.85rem; }
-  .stop-icon.attraction { background: var(--orange); }
-  .stop-icon.food { background: var(--red); }
-  .stop-icon.hotel { background: var(--purple); }
-  .stop-icon.fuel { background: var(--green); }
-  .stop-icon.border { background: #f39c12; }
+  .stop-icon.drive { background: var(--navy-700); font-size: 0.85rem; }
+  .stop-icon.attraction { background: rgba(249, 115, 22, 0.8); }
+  .stop-icon.food { background: rgba(248, 113, 113, 0.8); }
+  .stop-icon.hotel { background: rgba(192, 132, 252, 0.8); }
+  .stop-icon.fuel { background: rgba(74, 222, 128, 0.8); }
+  .stop-icon.border { background: rgba(250, 204, 21, 0.8); }
+
   .stop-info { flex: 1; }
-  .stop-name { font-weight: 700; font-size: 0.95rem; }
-  .stop-meta { font-size: 0.8rem; color: var(--text-light); }
+  .stop-name { font-weight: 600; font-size: 0.95rem; color: var(--amber-50); }
+  .stop-meta { font-size: 0.8rem; color: rgba(254, 243, 199, 0.4); }
+
   .stop-time-badge {
-    background: #eef2f7; color: var(--blue); font-size: 0.75rem;
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    color: var(--sunset-400); font-size: 0.72rem;
     font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 20px;
     white-space: nowrap;
   }
+
   .stop-details {
-    display: none; padding: 0 1.1rem 1rem; border-top: 1px solid var(--border);
-    font-size: 0.88rem; color: var(--text); animation: fadeIn 0.2s;
+    display: none; padding: 0 1.2rem 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 0.88rem; color: rgba(254, 243, 199, 0.75);
+    animation: fadeIn 0.2s;
   }
   .stop-details.open { display: block; }
   .stop-details p { margin: 0.5rem 0; }
   .stop-details .highlight {
-    background: #fff8e1; border-left: 3px solid var(--orange);
-    padding: 0.5rem 0.8rem; border-radius: 0 6px 6px 0; margin: 0.6rem 0;
-    font-size: 0.85rem;
+    background: rgba(249, 115, 22, 0.08);
+    border-left: 3px solid var(--sunset-500);
+    padding: 0.6rem 0.8rem; border-radius: 0 8px 8px 0;
+    margin: 0.6rem 0; font-size: 0.85rem;
+    color: rgba(254, 243, 199, 0.7);
   }
-  .chevron { color: var(--text-light); transition: transform 0.2s; font-size: 0.85rem; }
+
+  .chevron {
+    transition: transform 0.2s; font-size: 0.85rem;
+    color: rgba(254, 243, 199, 0.3);
+  }
   .chevron.open { transform: rotate(90deg); }
-  @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
   /* DRIVE CONNECTOR */
   .drive-seg {
-    display: flex; align-items: center; gap: 0.6rem;
-    padding: 0.4rem 0 0.4rem 1.1rem; font-size: 0.82rem; color: var(--text-light);
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.5rem 0 0.5rem 1.1rem;
+    font-size: 0.82rem; color: rgba(254, 243, 199, 0.35);
   }
-  .drive-seg .line { width: 2px; height: 20px; background: var(--border); margin-left: 17px; }
+  .drive-seg .line {
+    width: 2px; height: 20px;
+    background: linear-gradient(to bottom, rgba(249, 115, 22, 0.4), rgba(249, 115, 22, 0.15));
+    margin-left: 15px;
+  }
 
   /* CHECKLIST */
   .checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .checklist-card {
-    background: var(--card); border-radius: 10px; padding: 1rem;
-    border: 1px solid var(--border); box-shadow: var(--shadow);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px; padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
   }
-  .checklist-card h3 { font-size: 0.95rem; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.4rem; }
+  .checklist-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(249, 115, 22, 0.15);
+  }
+  .checklist-card h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem; font-weight: 600; margin-bottom: 0.6rem;
+    display: flex; align-items: center; gap: 0.4rem;
+    color: var(--amber-50);
+  }
   .checklist-card ul { list-style: none; padding: 0; }
   .checklist-card li {
-    padding: 0.3rem 0; padding-left: 1.4rem; position: relative;
-    font-size: 0.85rem; border-bottom: 1px solid #f5f5f5;
+    padding: 0.35rem 0; padding-left: 1.6rem; position: relative;
+    font-size: 0.85rem; color: rgba(254, 243, 199, 0.55);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   }
   .checklist-card li:last-child { border-bottom: none; }
   .checklist-card li::before {
     content: ''; position: absolute; left: 0; top: 0.55rem;
-    width: 14px; height: 14px; border: 2px solid var(--border);
+    width: 14px; height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
     border-radius: 3px;
   }
 
   /* ENTERTAINMENT */
   .ent-card {
-    background: var(--card); border-radius: 10px; padding: 1.2rem;
-    border: 1px solid var(--border); box-shadow: var(--shadow); margin-bottom: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px; padding: 1.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
   }
-  .ent-card h3 { font-size: 1rem; margin-bottom: 0.6rem; }
-  .ent-card p { font-size: 0.88rem; margin-bottom: 0.4rem; }
+  .ent-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(249, 115, 22, 0.15);
+  }
+  .ent-card h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem; font-weight: 600; margin-bottom: 0.6rem;
+    color: var(--amber-50);
+  }
+  .ent-card p { font-size: 0.88rem; margin-bottom: 0.4rem; color: rgba(254, 243, 199, 0.65); }
+
   .age-badge {
-    display: inline-block; font-size: 0.7rem; font-weight: 700;
+    display: inline-block; font-size: 0.68rem; font-weight: 700;
     padding: 0.15rem 0.5rem; border-radius: 12px; margin-right: 0.3rem;
+    letter-spacing: 0.02em;
   }
-  .age-4 { background: #fde8e8; color: var(--red); }
-  .age-8 { background: #dbeafe; color: var(--blue); }
-  .age-both { background: #d5f5e3; color: var(--green); }
+  .age-4 { background: rgba(248, 113, 113, 0.15); color: var(--red-400); }
+  .age-8 { background: rgba(96, 165, 250, 0.15); color: var(--blue-400); }
+  .age-both { background: rgba(74, 222, 128, 0.15); color: var(--green-400); }
 
   .schedule-tip {
-    background: linear-gradient(135deg, #eaf2f8, #d4efdf);
-    border-radius: 10px; padding: 1rem 1.2rem; margin: 1rem 0;
-    border: 1px solid #b2dfdb; font-size: 0.88rem;
+    background: rgba(249, 115, 22, 0.06);
+    border-radius: 12px; padding: 1rem 1.2rem; margin: 1rem 0;
+    border: 1px solid rgba(249, 115, 22, 0.15);
+    font-size: 0.88rem;
   }
-  .schedule-tip h3 { font-size: 0.95rem; margin-bottom: 0.5rem; }
+  .schedule-tip h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem;
+    color: var(--sunset-400);
+  }
+  .schedule-tip p { color: rgba(254, 243, 199, 0.6); }
 
-  .footer { text-align: center; font-size: 0.78rem; color: var(--text-light); margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+  /* Footer */
+  .footer-note {
+    text-align: center; margin-top: 2.5rem;
+    font-size: 0.8rem; color: rgba(254, 243, 199, 0.25);
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .footer-note a { color: var(--sunset-400); text-decoration: none; }
+  .footer-note a:hover { text-decoration: underline; }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
   @media (max-width: 650px) {
     .checklist-grid { grid-template-columns: 1fr; }
-    .tab-btn { padding: 0.8rem 0.8rem; font-size: 0.78rem; }
+    .tab-btn { padding: 0.6rem 0.7rem; font-size: 0.75rem; }
+    .stop-card-header { flex-wrap: wrap; gap: 0.5rem; }
   }
 </style>
 </head>
 <body>
+
+<div class="bg-glow"></div>
+<div class="dot-pattern"></div>
+
+<div class="container">
+<a href="index.html" class="back-link">&larr; Back to Trip Home</a>
+
+<div class="header">
+  <h1>Family Road Trip Guide</h1>
+  <p>Lawrence, MI &rarr; Boston, MA via Canada &mdash; 2 Days, 2 Kids</p>
+</div>
+</div>
 
 <!-- TAB BAR -->
 <div class="tab-bar">
@@ -169,8 +365,6 @@
 <!-- ======================= TAB 1: ITINERARY ======================= -->
 <div class="tab-content active" id="tab-itinerary">
 <div class="container">
-  <h1>Family Road Trip Itinerary</h1>
-  <p class="page-sub">Lawrence, MI to Boston, MA via Canada — 2 Days, 2 Kids (Ages 4 & 8)</p>
 
   <!-- DAY 1 -->
   <h2 class="day1">Day 1: Lawrence, MI to Syracuse, NY (~8-9 hrs driving)</h2>
@@ -414,7 +608,7 @@
 
   <div class="stop-card" onclick="toggleCard(this)">
     <div class="stop-card-header">
-      <div class="stop-icon" style="background:#e74c3c;">&#10084;</div>
+      <div class="stop-icon" style="background:rgba(248, 113, 113, 0.8);">&#10084;</div>
       <div class="stop-info">
         <div class="stop-name">Welcome to Boston!</div>
         <div class="stop-meta">You made it! Time to explore.</div>
@@ -437,7 +631,7 @@
 <!-- ======================= TAB 2: PACKING CHECKLIST ======================= -->
 <div class="tab-content" id="tab-checklist">
 <div class="container">
-  <h1>Family Road Trip Packing Checklist</h1>
+  <h1 class="section-title">Family Road Trip Packing Checklist</h1>
   <p class="page-sub">Everything you need for 2 days on the road with kids ages 4 & 8</p>
 
   <h2 class="checklist-head">Car & Travel Essentials</h2>
@@ -570,7 +764,7 @@
 <!-- ======================= TAB 3: ENTERTAINMENT ======================= -->
 <div class="tab-content" id="tab-entertainment">
 <div class="container">
-  <h1>Car Entertainment Guide</h1>
+  <h1 class="section-title">Car Entertainment Guide</h1>
   <p class="page-sub">Keep the kids happy for ~17 hours of driving across 2 days</p>
 
   <div class="schedule-tip">
@@ -686,7 +880,7 @@
 <!-- ======================= TAB 4: BORDER CROSSING ======================= -->
 <div class="tab-content" id="tab-border">
 <div class="container">
-  <h1>Canada Border Crossing Guide</h1>
+  <h1 class="section-title">Canada Border Crossing Guide</h1>
   <p class="page-sub">Everything you need for smooth crossings with kids</p>
 
   <h2 class="section">Required Documents — Keep Together & Accessible</h2>
@@ -776,8 +970,8 @@
 </div>
 </div>
 
-<div class="footer">
-  <p>Distances and times are approximate. Verify attractions' hours and admission prices before your trip. Created April 2026.</p>
+<div class="container">
+  <p class="footer-note">Distances and times are approximate. Verify attractions' hours and admission prices before your trip. Created April 2026.</p>
 </div>
 
 <script>
