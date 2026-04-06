@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Road Trip Guide — Lawrence, MI to Boston, MA</title>
+<style>
+  :root {
+    --blue: #1a5276;
+    --blue-light: #2980b9;
+    --green: #27ae60;
+    --orange: #e67e22;
+    --red: #c0392b;
+    --purple: #8e44ad;
+    --teal: #16a085;
+    --bg: #fafbfc;
+    --card: #ffffff;
+    --border: #e0e0e0;
+    --text: #2c3e50;
+    --text-light: #6c757d;
+    --shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+
+  /* NAV TABS */
+  .tab-bar {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--blue); display: flex; justify-content: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+  .tab-btn {
+    background: none; border: none; color: rgba(255,255,255,0.7);
+    padding: 1rem 1.5rem; font-size: 0.9rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; border-bottom: 3px solid transparent;
+    font-family: inherit;
+  }
+  .tab-btn:hover { color: white; background: rgba(255,255,255,0.08); }
+  .tab-btn.active { color: white; border-bottom-color: var(--orange); }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .container { max-width: 850px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+
+  h1 { font-size: 1.7rem; color: var(--blue); text-align: center; margin: 1.5rem 0 0.3rem; }
+  .page-sub { text-align: center; color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.95rem; }
+
+  h2 {
+    font-size: 1.2rem; color: white; padding: 0.7rem 1rem;
+    border-radius: 8px; margin: 1.5rem 0 1rem;
+  }
+  h2.day1 { background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%); }
+  h2.day2 { background: linear-gradient(135deg, var(--teal) 0%, var(--green) 100%); }
+  h2.section { background: linear-gradient(135deg, var(--orange) 0%, #d35400 100%); }
+  h2.checklist-head { background: linear-gradient(135deg, var(--purple) 0%, #6c3483 100%); }
+  h2.entertainment { background: linear-gradient(135deg, var(--green) 0%, var(--teal) 100%); }
+
+  /* ITINERARY CARDS */
+  .stop-card {
+    background: var(--card); border-radius: 10px; border: 1px solid var(--border);
+    box-shadow: var(--shadow); margin-bottom: 1rem; overflow: hidden;
+  }
+  .stop-card-header {
+    display: flex; align-items: center; gap: 0.8rem;
+    padding: 0.9rem 1.1rem; cursor: pointer;
+  }
+  .stop-card-header:hover { background: #f7fafc; }
+  .stop-icon {
+    width: 38px; height: 38px; border-radius: 50%; display: flex;
+    align-items: center; justify-content: center; font-size: 1.1rem;
+    flex-shrink: 0; color: white;
+  }
+  .stop-icon.drive { background: var(--text-light); font-size: 0.85rem; }
+  .stop-icon.attraction { background: var(--orange); }
+  .stop-icon.food { background: var(--red); }
+  .stop-icon.hotel { background: var(--purple); }
+  .stop-icon.fuel { background: var(--green); }
+  .stop-icon.border { background: #f39c12; }
+  .stop-info { flex: 1; }
+  .stop-name { font-weight: 700; font-size: 0.95rem; }
+  .stop-meta { font-size: 0.8rem; color: var(--text-light); }
+  .stop-time-badge {
+    background: #eef2f7; color: var(--blue); font-size: 0.75rem;
+    font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 20px;
+    white-space: nowrap;
+  }
+  .stop-details {
+    display: none; padding: 0 1.1rem 1rem; border-top: 1px solid var(--border);
+    font-size: 0.88rem; color: var(--text); animation: fadeIn 0.2s;
+  }
+  .stop-details.open { display: block; }
+  .stop-details p { margin: 0.5rem 0; }
+  .stop-details .highlight {
+    background: #fff8e1; border-left: 3px solid var(--orange);
+    padding: 0.5rem 0.8rem; border-radius: 0 6px 6px 0; margin: 0.6rem 0;
+    font-size: 0.85rem;
+  }
+  .chevron { color: var(--text-light); transition: transform 0.2s; font-size: 0.85rem; }
+  .chevron.open { transform: rotate(90deg); }
+  @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+
+  /* DRIVE CONNECTOR */
+  .drive-seg {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.4rem 0 0.4rem 1.1rem; font-size: 0.82rem; color: var(--text-light);
+  }
+  .drive-seg .line { width: 2px; height: 20px; background: var(--border); margin-left: 17px; }
+
+  /* CHECKLIST */
+  .checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .checklist-card {
+    background: var(--card); border-radius: 10px; padding: 1rem;
+    border: 1px solid var(--border); box-shadow: var(--shadow);
+  }
+  .checklist-card h3 { font-size: 0.95rem; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.4rem; }
+  .checklist-card ul { list-style: none; padding: 0; }
+  .checklist-card li {
+    padding: 0.3rem 0; padding-left: 1.4rem; position: relative;
+    font-size: 0.85rem; border-bottom: 1px solid #f5f5f5;
+  }
+  .checklist-card li:last-child { border-bottom: none; }
+  .checklist-card li::before {
+    content: ''; position: absolute; left: 0; top: 0.55rem;
+    width: 14px; height: 14px; border: 2px solid var(--border);
+    border-radius: 3px;
+  }
+
+  /* ENTERTAINMENT */
+  .ent-card {
+    background: var(--card); border-radius: 10px; padding: 1.2rem;
+    border: 1px solid var(--border); box-shadow: var(--shadow); margin-bottom: 1rem;
+  }
+  .ent-card h3 { font-size: 1rem; margin-bottom: 0.6rem; }
+  .ent-card p { font-size: 0.88rem; margin-bottom: 0.4rem; }
+  .age-badge {
+    display: inline-block; font-size: 0.7rem; font-weight: 700;
+    padding: 0.15rem 0.5rem; border-radius: 12px; margin-right: 0.3rem;
+  }
+  .age-4 { background: #fde8e8; color: var(--red); }
+  .age-8 { background: #dbeafe; color: var(--blue); }
+  .age-both { background: #d5f5e3; color: var(--green); }
+
+  .schedule-tip {
+    background: linear-gradient(135deg, #eaf2f8, #d4efdf);
+    border-radius: 10px; padding: 1rem 1.2rem; margin: 1rem 0;
+    border: 1px solid #b2dfdb; font-size: 0.88rem;
+  }
+  .schedule-tip h3 { font-size: 0.95rem; margin-bottom: 0.5rem; }
+
+  .footer { text-align: center; font-size: 0.78rem; color: var(--text-light); margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+
+  @media (max-width: 650px) {
+    .checklist-grid { grid-template-columns: 1fr; }
+    .tab-btn { padding: 0.8rem 0.8rem; font-size: 0.78rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showTab('itinerary')">Day-by-Day Itinerary</button>
+  <button class="tab-btn" onclick="showTab('checklist')">Packing Checklist</button>
+  <button class="tab-btn" onclick="showTab('entertainment')">Car Entertainment</button>
+  <button class="tab-btn" onclick="showTab('border')">Border Crossing</button>
+</div>
+
+<!-- ======================= TAB 1: ITINERARY ======================= -->
+<div class="tab-content active" id="tab-itinerary">
+<div class="container">
+  <h1>Family Road Trip Itinerary</h1>
+  <p class="page-sub">Lawrence, MI to Boston, MA via Canada — 2 Days, 2 Kids (Ages 4 & 8)</p>
+
+  <!-- DAY 1 -->
+  <h2 class="day1">Day 1: Lawrence, MI to Syracuse, NY (~8-9 hrs driving)</h2>
+
+  <div class="stop-card" onclick="toggleCard(this)">
+    <div class="stop-card-header">
+      <div class="stop-icon fuel">&#9981;</div>
+      <div class="stop-info">
+        <div class="stop-name">Costco Gas — Kalamazoo, MI</div>
+        <div class="stop-meta">5100 Century Ave · First fill-up</div>
+      </div>
+      <span class="stop-time-badge">~8:30 AM</span>
+      <span class="chevron">&#9654;</span>
+    </div>
+    <div class="stop-details">
+      <p>29 miles from Lawrence (~31 min). Fill up the tank and grab any last-minute snacks from the Costco warehouse before hitting I-94 East toward Detroit.</p>
+    </div>
+  </div>
+
+  <div class="drive-seg"><div class="line"></div> 150 mi · ~2 hr 15 min via I-94 E</div>
+
+  <div class="stop-card" onclick="toggleCard(this)">
+    <div class="stop-card-header">
+      <div class="stop-icon fuel">&#9981;</div>
+      <div class="stop-info">
+        <div class="stop-name">Costco Gas — Madison Heights, MI</div>
+        <div class="stop-meta">30550 Stephenson Hwy · Last US gas before Canada</div>
+      </div>
+      <span class="stop-time-badge">~11:00 AM</span>
+      <span class="chevron">&#9654;</span>
+    </div>
+    <div class="stop-details">
+      <p>Fill up here — US gas is cheaper than Canada. Let the kids stretch their legs. Michigan I-94 rest areas have playgrounds, so consider a 15-min stop along the way.</p>
+      <div class="highlight">Michigan rest areas along I-94 feature playgrounds — perfect for burning off energy before the border crossing.</div>
+    </div>
+  </div>
+
+  <div class="drive-seg"><div class="line"></div> ~45 mi · ~40 min to Ambassador Bridge</div>
+
+  <div class="stop-card" onclick="toggleCard(this)">
+    <div class="stop-card-header">
+      <div class="stop-icon border">&#9888;</div>
+      <div class="stop-info">
+        <div class="stop-name">Ambassador Bridge — Into Canada</div>
+        <div class="stop-meta">Detroit, MI to Windsor, ON · Allow 30-90 min</div>
+      </div>
+      <span class="stop-time-badge">~12:00 PM</span>
+      <span class="chevron">&#9654;</span>
+    </div>
+    <div class="stop-details">
+      <p>Have passports and kids' documents ready and accessible before you reach the booth. See the Border Crossing tab for a full document checklist.</p>
+      <div class="highlight">Tip: Have snacks and entertainment queued up for the kids — wait times can be unpredictable. Avoid crossing on Friday evenings or holiday weekends.</div>
+    </div>
+  </div>
+
+  <div class="drive-seg"><div class="line"></div> ~170 mi · ~2 hr 45 min via ON-401 E / QEW</div>
+
+  <div class="stop-card" onclick="toggleCard(this)">
+    <div class="stop-card-header">
+      <div class="stop-icon fuel">&#9981;</div>
+      <div class="stop-info">
+        <div class="stop-name">Costco Gas — Hamilton/Ancaster, ON</div>
+        <div class="stop-meta">100 Legend Court · Canadian Costco stop</div>
+      </div>
+      <span class="stop-time-badge">~3:30 PM</span>
+      <span class="chevron">&#9654;</span>
+    </div>
+    <div class="stop-details">
+      <p>Your US Costco membership works here. Gas is priced in CAD per litre. Good time for a bathroom break and snack refill.</p>
+    </div>
+  </div>
+
+  <div class="drive-seg"><div class="line"></div> ~170 mi · ~2 hr 45 min via QEW S to Peace Bridge</div>
+
+  <div class="stop-card" onclick="toggleCard(this)">
+    <div class="stop-card-header">
+      <div class="stop-icon attraction">&#9733;</div>
+      <div class="stop-info">
+        <div class="stop-name">Niagara Falls — Quick Stop!</div>
+        <div class="stop-meta">Right on your route via QEW · Free to view</div>
+      </div>
+      <span class="stop-time-badge">~4:30 PM</span>
+      <span class="chevron">&#9654;</span>
+    </div>
+    <div class="stop-details">
+      <p><strong>Even a 30-minute stop is unforgettable for the kids.</strong> The Canadian side has the best views, and the promenade is stroller-friendly with grassy areas.</p>
+      <p><strong>Quick options:</strong></p>
+      <p>&#8226; <strong>Table Rock Welcome Centre</strong> — Walk-up viewing, totally free, right at the falls</p>
+      <p>&#8226; <strong>Falls Incline Railway</strong> — CA$2.75/person, kids 5 & under free</p>
+      <p>&#8226; <strong>Bird Kingdom</strong> — Indoor aviary on Clifton Hill (CA$21.95 adults / CA$15.95 kids 3+). Kids can have birds land on their arms at Lorikeet Landing!</p>
+      <div class="highlight">If you have more time, Journey Behind the Falls takes you in tunnels below the cascading water — both kids would love it.</div>
+    </div>
+  </div>
+
+  <div class="drive-seg"><div class="line"></div> Peace Bridge crossing + ~15 mi to Costco</div>
+
+  <div class="stop-card" onclick="toggleCard(this)">
+    <div class="stop-card-header">
+      <div class="stop-icon border">&#9888;</div>
+      <div class="stop-info">
+        <div class="stop-name">Peace Bridge — Back into USA</div>
+        <div class="stop-meta">Fort Erie, ON to Buffalo, NY · ~$6 toll</div>
+      </div>
+      <span class="stop-time-badge">~5:30 PM</span>
+      <span class="chevron">&#9654;</span>
+    </div>
+    <div class="stop-details">
+      <p>Declare any Canadian purchases. Keep receipts handy. Usually faster than Rainbow Bridge.</p>
+    </div>
+  </div>
+
+  <div class="drive-seg"><div class="line"></div> ~140 mi · ~2 hr 15 min via I-90 E</div>
+
+  <div class="stop-card" onclick="toggleCard(this)">
+    <div class="stop-card-header">
+      <div class="stop-icon attraction">&#9733;</div>
+      <div class="stop-info">
+        <div class="stop-name">Strong National Museum of Play — Rochester, NY</div>
+        <div class="stop-meta">1 Manhattan Square Dr · World's largest toy museum</div>
+      </div>
+      <span class="stop-time-badge">Optional</span>
+      <span class="chevron">&#9654;</span>
+    </div>
+    <div class="stop-details">
+      <p>If you're making great time, this is an incredible stop for both ages. Massive interactive exhibits, a working carousel, and a Sesame Street exhibit. Worth an hour even if you can't do the whole museum.</p>
+      <div class="highlight">If you skip this, the Seneca Park Zoo in Rochester is a smaller, quicker option with 90+ species and easy walks for little legs.</div>
+    </div>
+  </div>
+
+  <div class="drive-seg"><div class="line"></div> ~70 mi · ~1 hr to Syracuse</div>
+
+  <div class="stop-card" onclick="toggleCard(this)">
+    <div class="stop-card-header">
+      <div class="stop-icon fuel">&#9981;</div>
+      <div class="stop-info">
+        <div class="stop-name">Costco Gas — Camillus, NY (Syracuse)</div>
+        <div class="stop-meta">120 Township Blvd · Fill up for the night</div>
+      </div>
+      <span class="stop-time-badge">~8:00 PM</span>
+      <span class="chevron">&#9654;</span>
+    </div>
+    <div class="stop-details">
+      <p>Gas up for the night. Costco gas closes around 9:30 PM on weekdays, so don't cut it too close.</p>
+    </div>
+  </div>
+
+  <div class="stop-card" onclick="toggleCard(this)">
+    <div class="stop-card-header">
+      <div class="stop-icon hotel">&#9790;</div>
+      <div class="stop-info">
+        <div class="stop-name">Overnight — Syracuse/Camillus Area</div>
+        <div class="stop-meta">Recommended: Tru by Hilton Syracuse-Camillus</div>
+      </div>
+      <span class="stop-time-badge">Night</span>
+      <span class="chevron">&#9654;</span>
+    </div>
+    <div class="stop-details">
+      <p><strong>Tru by Hilton Syracuse-Camillus</strong> — Indoor play area and toys for kids, complimentary breakfast, near I-90. Budget-friendly and clean.</p>
+      <p><strong>Homewood Suites (East Syracuse)</strong> — Pool, free breakfast, suites with kitchenettes (great for warming up kid-friendly meals).</p>
+      <p><strong>Staybridge Suites (Liverpool)</strong> — Another suite option with pool and breakfast.</p>
+      <div class="highlight">Dinner ideas near Camillus: Destiny USA mall (10 min away) has tons of family restaurants, plus an indoor go-kart track and bowling — great for burning off car energy!</div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <h2 class="day2">Day 2: Syracuse, NY to Boston, MA (~5-6 hrs driving)</h2>
+
+  <div class="stop-card" onclick="toggleCard(this)">
+    <div class="stop-card-header">
+      <div class="stop-icon attraction">&#9733;</div>
+      <div class="stop-info">
+        <div class="stop-name">Optional Morning Stop — Syracuse Attractions</div>
+        <div class="stop-meta">Before hitting the road</div>
+      </div>
+      <span class="stop-time-badge">~9:00 AM</span>
+      <span class="chevron">&#9654;</span>
+    </div>
+    <div class="stop-details">
+      <p>If you're not in a rush, Syracuse has some fun options before you leave:</p>
+      <p>&#8226; <strong>Rosamond Gifford Zoo</strong> — Compact and walkable, great for young kids. 5.8 mi from Camillus.</p>
+      <p>&#8226; <strong>MoST (Museum of Science & Technology)</strong> — Domed IMAX theater, earth science cave, rock-climbing wall.</p>
+      <p>&#8226; <strong>WonderWorks</strong> — Indoor amusement park with hurricane simulator and ropes course.</p>
+    </div>
+  </div>
+
+  <div class="drive-seg"><div class="line"></div> 141 mi · ~2 hr 10 min via I-90 E</div>
+
+  <div class="stop-card" onclick="toggleCard(this)">
+    <div class="stop-card-header">
+      <div class="stop-icon fuel">&#9981;</div>
+      <div class="stop-info">
+        <div class="stop-name">Costco Gas — Westmere/Albany, NY</div>
+        <div class="stop-meta">Near Crossgates Mall · Last fill before Mass Pike</div>
+      </div>
+      <span class="stop-time-badge">~11:30 AM</span>
+      <span class="chevron">&#9654;</span>
+    </div>
+    <div class="stop-details">
+      <p>Fill up here — it's ~180 miles to the next Costco in Dedham, MA. Let the kids stretch and use the restroom.</p>
+      <div class="highlight">Crossgates Mall is right here if you need a real break — food court, play areas, and plenty of options.</div>
+    </div>
+  </div>
+
+  <div class="drive-seg"><div class="line"></div> ~100 mi · ~1 hr 30 min via I-90 E</div>
+
+  <div class="stop-card" onclick="toggleCard(this)">
+    <div class="stop-card-header">
+      <div class="stop-icon attraction">&#9733;</div>
+      <div class="stop-info">
+        <div class="stop-name">Springfield, MA — Optional Stops</div>
+        <div class="stop-meta">I-90 corridor · Great for an afternoon break</div>
+      </div>
+      <span class="stop-time-badge">~1:00 PM</span>
+      <span class="chevron">&#9654;</span>
+    </div>
+    <div class="stop-details">
+      <p>&#8226; <strong>The Amazing World of Dr. Seuss Museum</strong> — Interactive exhibits celebrating the beloved author. The 4-year-old will especially love this.</p>
+      <p>&#8226; <strong>Basketball Hall of Fame</strong> — Great for the 8-year-old if they're into sports. Interactive shooting courts.</p>
+      <p>&#8226; <strong>Six Flags New England</strong> (Agawam, just south) — If you have a full afternoon and want a big adventure.</p>
+    </div>
+  </div>
+
+  <div class="drive-seg"><div class="line"></div> ~80 mi · ~1 hr 15 min via I-90 E</div>
+
+  <div class="stop-card" onclick="toggleCard(this)">
+    <div class="stop-card-header">
+      <div class="stop-icon fuel">&#9981;</div>
+      <div class="stop-info">
+        <div class="stop-name">Costco Gas — Dedham, MA</div>
+        <div class="stop-meta">200 Legacy Blvd · Final fill-up!</div>
+      </div>
+      <span class="stop-time-badge">~3:00 PM</span>
+      <span class="chevron">&#9654;</span>
+    </div>
+    <div class="stop-details">
+      <p>Just southwest of Boston. Top off the tank and you're 25 minutes from downtown!</p>
+    </div>
+  </div>
+
+  <div class="drive-seg"><div class="line"></div> ~12 mi · ~25 min via I-95 N</div>
+
+  <div class="stop-card" onclick="toggleCard(this)">
+    <div class="stop-card-header">
+      <div class="stop-icon" style="background:#e74c3c;">&#10084;</div>
+      <div class="stop-info">
+        <div class="stop-name">Welcome to Boston!</div>
+        <div class="stop-meta">You made it! Time to explore.</div>
+      </div>
+      <span class="stop-time-badge">~3:30 PM</span>
+      <span class="chevron">&#9654;</span>
+    </div>
+    <div class="stop-details">
+      <p><strong>Great first-afternoon activities with kids:</strong></p>
+      <p>&#8226; <strong>Boston Public Garden</strong> — Ride the famous Swan Boats from "Make Way for Ducklings." Free to walk through, Swan Boats ~$4.50/person.</p>
+      <p>&#8226; <strong>New England Aquarium</strong> — 200,000-gallon tank, penguins, touch pools. Both ages will love it.</p>
+      <p>&#8226; <strong>Boston Children's Museum</strong> — 3 floors of hands-on learning with a dedicated soft play area for little ones.</p>
+      <div class="highlight">The Aquarium and Children's Museum are both on the waterfront and walkable from each other — easy to combine.</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ======================= TAB 2: PACKING CHECKLIST ======================= -->
+<div class="tab-content" id="tab-checklist">
+<div class="container">
+  <h1>Family Road Trip Packing Checklist</h1>
+  <p class="page-sub">Everything you need for 2 days on the road with kids ages 4 & 8</p>
+
+  <h2 class="checklist-head">Car & Travel Essentials</h2>
+  <div class="checklist-grid">
+    <div class="checklist-card">
+      <h3>&#128203; Documents</h3>
+      <ul>
+        <li>Valid passports for all family members</li>
+        <li>Kids' birth certificates (backup)</li>
+        <li>Notarized parental consent letter (if one parent not traveling)</li>
+        <li>Vehicle registration</li>
+        <li>Proof of auto insurance</li>
+        <li>Costco membership card</li>
+        <li>Visa credit/debit card (for Costco gas)</li>
+        <li>Hotel reservation confirmation</li>
+        <li>Printed/downloaded itinerary</li>
+      </ul>
+    </div>
+    <div class="checklist-card">
+      <h3>&#128663; Car Supplies</h3>
+      <ul>
+        <li>Age-appropriate car seats (both kids)</li>
+        <li>Car seat organizers / back seat organizers</li>
+        <li>Phone mount / GPS</li>
+        <li>Car chargers (multiple USB)</li>
+        <li>Portable battery pack</li>
+        <li>Sunshades for rear windows</li>
+        <li>Trash bag for the car</li>
+        <li>Blankets and travel pillows</li>
+        <li>Roadside emergency kit</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="checklist-head">Food & Snacks</h2>
+  <div class="checklist-grid">
+    <div class="checklist-card">
+      <h3>&#127863; Cooler / Perishable</h3>
+      <ul>
+        <li>Cooler with ice packs</li>
+        <li>Cheese sticks / string cheese</li>
+        <li>Yogurt tubes (freeze overnight)</li>
+        <li>Pre-made sandwiches</li>
+        <li>Hardboiled eggs</li>
+        <li>Cut fruit (grapes, berries, melon)</li>
+        <li>Juice boxes</li>
+        <li>Milk/chocolate milk boxes</li>
+      </ul>
+    </div>
+    <div class="checklist-card">
+      <h3>&#127871; Dry Snacks</h3>
+      <ul>
+        <li>Goldfish crackers / animal crackers</li>
+        <li>Trail mix / granola bars</li>
+        <li>Dried fruit (raisins, mango)</li>
+        <li>Cheerios / dry cereal in containers</li>
+        <li>Applesauce pouches</li>
+        <li>Pretzels</li>
+        <li>Fruit snacks</li>
+        <li>Water bottles (refillable, for each person)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="checklist-head">Kids' Comfort & Entertainment</h2>
+  <div class="checklist-grid">
+    <div class="checklist-card">
+      <h3>&#127912; Activities</h3>
+      <ul>
+        <li>Tablets (loaded with movies/shows/games)</li>
+        <li>Kid headphones (volume-limited)</li>
+        <li>Coloring books + crayons</li>
+        <li>Sticker books</li>
+        <li>Melissa & Doug Water Wow pads</li>
+        <li>Magnetic drawing boards</li>
+        <li>New library books (surprise factor!)</li>
+        <li>Small figurines / action figures</li>
+        <li>Travel-size board games</li>
+      </ul>
+    </div>
+    <div class="checklist-card">
+      <h3>&#128524; Comfort</h3>
+      <ul>
+        <li>Favorite stuffed animal / lovey</li>
+        <li>Travel pillows</li>
+        <li>Lightweight blankets</li>
+        <li>Change of clothes (easily accessible)</li>
+        <li>Pajamas in overnight bag</li>
+        <li>Swimsuit (if hotel has pool!)</li>
+        <li>Jackets / layers (April weather)</li>
+        <li>Comfortable shoes + a spare pair</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="checklist-head">Health & Hygiene</h2>
+  <div class="checklist-grid">
+    <div class="checklist-card">
+      <h3>&#129658; First Aid & Medicine</h3>
+      <ul>
+        <li>Children's Tylenol / Motrin</li>
+        <li>Children's Benadryl</li>
+        <li>Band-aids (fun character ones!)</li>
+        <li>Antiseptic wipes</li>
+        <li>Sunscreen SPF 50</li>
+        <li>Bug spray</li>
+        <li>Motion sickness remedy</li>
+        <li>Any daily medications</li>
+        <li>Thermometer</li>
+      </ul>
+    </div>
+    <div class="checklist-card">
+      <h3>&#129532; Cleanup</h3>
+      <ul>
+        <li>Baby wipes (lots!)</li>
+        <li>Hand sanitizer</li>
+        <li>Paper towels / napkins</li>
+        <li>Plastic bags (for dirty clothes/trash)</li>
+        <li>Stain remover pen</li>
+        <li>Tissues</li>
+        <li>Toothbrushes + toothpaste</li>
+        <li>Spare plastic bags (for car sickness)</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ======================= TAB 3: ENTERTAINMENT ======================= -->
+<div class="tab-content" id="tab-entertainment">
+<div class="container">
+  <h1>Car Entertainment Guide</h1>
+  <p class="page-sub">Keep the kids happy for ~17 hours of driving across 2 days</p>
+
+  <div class="schedule-tip">
+    <h3>The Golden Rule: Rotate Every 30-45 Minutes</h3>
+    <p>Pack a "surprise bin" accessible from the front seat. Swap activities every 30-45 minutes to keep things fresh. Novelty is more powerful than any single toy — even dollar store surprises wrapped in tissue paper can buy you an hour of peace.</p>
+  </div>
+
+  <h2 class="entertainment">Screen-Free Activities</h2>
+
+  <div class="ent-card">
+    <h3>Melissa & Doug Water Wow Pads</h3>
+    <span class="age-badge age-both">Ages 4 & 8</span>
+    <p>Reusable water-based painting pads — fill the pen with water, paint the pages, let them dry, and do it again. Zero mess. These are absolute road trip gold.</p>
+  </div>
+
+  <div class="ent-card">
+    <h3>Magnetic Drawing Boards & Activities</h3>
+    <span class="age-badge age-both">Ages 4 & 8</span>
+    <p>Magna Doodle-style drawing boards or magnetic tangram puzzles. The 8-year-old might enjoy magnetic building tiles. Nothing rolls under seats!</p>
+  </div>
+
+  <div class="ent-card">
+    <h3>Sticker Books & Window Clings</h3>
+    <span class="age-badge age-4">Age 4</span> <span class="age-badge age-8">Age 8</span>
+    <p>Reusable sticker scenes for the 4-year-old. The 8-year-old might prefer sticker-by-number books (more challenging). Window clings from the dollar store let them decorate their car window.</p>
+  </div>
+
+  <div class="ent-card">
+    <h3>New Library Books</h3>
+    <span class="age-badge age-both">Ages 4 & 8</span>
+    <p>Check out a stack of new-to-them books from the library before the trip. The novelty factor makes these way more engaging than books they already own. Graphic novels and "I Spy" books are great for the 8-year-old.</p>
+  </div>
+
+  <div class="ent-card">
+    <h3>Coloring & Activity Books</h3>
+    <span class="age-badge age-4">Age 4</span> <span class="age-badge age-8">Age 8</span>
+    <p>Chunky crayons and simple coloring books for the 4-year-old. The 8-year-old might enjoy crossword puzzles, word searches, or Mad Libs (Junior edition). Use a clipboard or lap desk for a stable surface.</p>
+  </div>
+
+  <div class="ent-card">
+    <h3>Small Toys & Figurines</h3>
+    <span class="age-badge age-both">Ages 4 & 8</span>
+    <p>A small bag of action figures, toy cars, or Polly Pockets. Bonus: wrap a few in tissue paper as "surprise gifts" to open at scheduled intervals. Dollar store toys work perfectly for this.</p>
+  </div>
+
+  <h2 class="entertainment">Audio Entertainment</h2>
+
+  <div class="ent-card">
+    <h3>Audiobooks (Play Through Car Speakers)</h3>
+    <span class="age-badge age-both">Ages 4 & 8</span>
+    <p>Download from your library's Libby or Hoopla app — free with a library card! Great picks that work for both ages:</p>
+    <p>&#8226; <strong>The Magic Tree House series</strong> — perfect for the 8-year-old, engaging enough for the 4-year-old</p>
+    <p>&#8226; <strong>Winnie the Pooh</strong> — timeless, gentle, both ages love it</p>
+    <p>&#8226; <strong>Dog Man series</strong> — funny and engaging for the 8-year-old</p>
+    <p>&#8226; <strong>Frog and Toad</strong> — short chapters, sweet stories, great for the 4-year-old</p>
+  </div>
+
+  <div class="ent-card">
+    <h3>Kid-Friendly Podcasts</h3>
+    <span class="age-badge age-both">Ages 4 & 8</span>
+    <p>Download episodes before the trip (cell service may be spotty in Ontario):</p>
+    <p>&#8226; <strong>Wow in the World</strong> — science and wonder, great for curious kids</p>
+    <p>&#8226; <strong>Story Pirates</strong> — stories written by kids, performed by comedians</p>
+    <p>&#8226; <strong>But Why?</strong> — answers kids' real questions about the world</p>
+    <p>&#8226; <strong>Circle Round</strong> — folktales from around the world</p>
+  </div>
+
+  <div class="ent-card">
+    <h3>Music & Sing-Alongs</h3>
+    <span class="age-badge age-both">Ages 4 & 8</span>
+    <p>Create a family road trip playlist before you leave! Mix their favorites with road trip classics. Freeze dance (everyone freezes when you pause the music) works even in car seats.</p>
+  </div>
+
+  <h2 class="entertainment">Screen Time (Strategic Use)</h2>
+
+  <div class="ent-card">
+    <h3>Tablets — The Secret Weapon</h3>
+    <span class="age-badge age-both">Ages 4 & 8</span>
+    <p>Download content before the trip — you'll lose cell service in parts of Ontario and rural New York.</p>
+    <p>&#8226; <strong>Movies:</strong> Download 3-4 movies each on their tablets. Save the favorites for the longest/hardest stretches.</p>
+    <p>&#8226; <strong>Apps:</strong> Khan Academy Kids (age 4), Toca Boca apps (both), PBS Kids Games (age 4), Minecraft (age 8)</p>
+    <p>&#8226; <strong>Key tip:</strong> Get volume-limiting headphones for each kid. Your sanity will thank you.</p>
+    <div class="highlight">Pro tip: Save screen time as your "ace in the hole" for the hardest parts of the drive — late afternoon on Day 1, or the last 2 hours before Boston.</div>
+  </div>
+
+  <h2 class="entertainment">Car Games (No Supplies Needed)</h2>
+
+  <div class="ent-card">
+    <h3>Games the Whole Family Can Play</h3>
+    <span class="age-badge age-both">Ages 4 & 8</span>
+    <p>&#8226; <strong>I Spy</strong> — Classic. The 4-year-old can play with colors ("I spy something blue").</p>
+    <p>&#8226; <strong>License Plate Game</strong> — Spot plates from different states/provinces. The 8-year-old can keep a written tally.</p>
+    <p>&#8226; <strong>20 Questions</strong> — Great for the 8-year-old. Simplify for the 4-year-old (animal, food, or toy?).</p>
+    <p>&#8226; <strong>Would You Rather?</strong> — Silly options keep everyone laughing. "Would you rather have spaghetti hair or pizza ears?"</p>
+    <p>&#8226; <strong>The Alphabet Game</strong> — Find letters A-Z on signs, license plates, and billboards in order.</p>
+    <p>&#8226; <strong>Scavenger Hunt</strong> — Make a simple picture list before the trip (red barn, cow, bridge, police car, etc.).</p>
+  </div>
+
+  <div class="schedule-tip">
+    <h3>Suggested Activity Rotation Schedule</h3>
+    <p><strong>First hour:</strong> Excitement carries them — books, window watching, car games<br>
+    <strong>Hour 2:</strong> Activity bin — Water Wow, stickers, coloring<br>
+    <strong>Hour 3:</strong> Audiobook or podcast through car speakers<br>
+    <strong>Hour 4:</strong> REST STOP — 15 min to run around<br>
+    <strong>Hour 5:</strong> Surprise toys/gifts<br>
+    <strong>Hour 6+:</strong> Screen time — deploy the tablets<br>
+    <strong>Last stretch:</strong> Car games and sing-alongs to finish strong</p>
+  </div>
+
+</div>
+</div>
+
+<!-- ======================= TAB 4: BORDER CROSSING ======================= -->
+<div class="tab-content" id="tab-border">
+<div class="container">
+  <h1>Canada Border Crossing Guide</h1>
+  <p class="page-sub">Everything you need for smooth crossings with kids</p>
+
+  <h2 class="section">Required Documents — Keep Together & Accessible</h2>
+
+  <div class="checklist-grid">
+    <div class="checklist-card">
+      <h3>&#128274; Entering Canada (Ambassador Bridge)</h3>
+      <ul>
+        <li>Valid US Passport for each adult</li>
+        <li>Valid US Passport for each child <em>OR</em></li>
+        <li>Original/certified birth certificate for kids under 16 (land crossing only)</li>
+        <li>Enhanced Driver's License (MI residents — accepted at land borders)</li>
+        <li>Vehicle registration</li>
+        <li>Proof of auto insurance</li>
+        <li>Notarized consent letter (if one parent absent)</li>
+      </ul>
+    </div>
+    <div class="checklist-card">
+      <h3>&#127482;&#127480; Returning to USA (Peace Bridge)</h3>
+      <ul>
+        <li>Same passport/ID documents as entry</li>
+        <li>Keep all Canadian purchase receipts</li>
+        <li>Declare all purchases at US customs</li>
+        <li>Duty-free allowance: $200 USD for trips 24-48 hrs</li>
+        <li>No fresh fruits/vegetables across border</li>
+        <li>No more than $10,000 currency undeclared</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="section">Traveling with Children — Special Notes</h2>
+
+  <div class="ent-card">
+    <h3>If Both Parents Are in the Car</h3>
+    <p>You're all set as long as each person has valid ID. Passports for the whole family is the simplest approach. Border agents may ask your kids basic questions (their name, where they're going) — prep them ahead of time so they're not nervous.</p>
+  </div>
+
+  <div class="ent-card">
+    <h3>If Only One Parent Is Driving</h3>
+    <p><strong>This is critical:</strong> Carry a notarized consent letter from the absent parent. The letter should include:</p>
+    <p>&#8226; The children's full names and dates of birth</p>
+    <p>&#8226; The traveling parent's full name</p>
+    <p>&#8226; The absent parent's full name and contact information</p>
+    <p>&#8226; Travel dates and destination</p>
+    <p>&#8226; A statement of permission: "I consent to my child(ren) traveling to Canada with [parent name]"</p>
+    <p>&#8226; Notarized signature of the absent parent</p>
+    <div class="highlight">Canada takes child safety at borders very seriously. Without this letter, you may face significant delays or be denied entry.</div>
+  </div>
+
+  <div class="ent-card">
+    <h3>Making the Crossing Smooth with Kids</h3>
+    <p>&#8226; <strong>Before the booth:</strong> Turn off music, wake sleeping kids (agents may want to see them), have documents in hand</p>
+    <p>&#8226; <strong>Stack documents:</strong> All passports together in one hand, registration and insurance in the other</p>
+    <p>&#8226; <strong>Be friendly and concise:</strong> "Family road trip to Boston" is all you need</p>
+    <p>&#8226; <strong>Don't volunteer extra info:</strong> Answer questions directly without over-explaining</p>
+    <p>&#8226; <strong>Prep the 8-year-old:</strong> They may be asked questions directly — practice "What's your name?" and "Where are you going?"</p>
+    <p>&#8226; <strong>Have snacks ready:</strong> Unpredictable wait times are easier with fed kids</p>
+  </div>
+
+  <h2 class="section">Crossing Logistics</h2>
+
+  <div class="checklist-grid">
+    <div class="checklist-card">
+      <h3>Ambassador Bridge (Into Canada)</h3>
+      <ul>
+        <li>Toll: ~$5 USD (cash or card)</li>
+        <li>Open 24/7</li>
+        <li>Best times: Early morning, mid-week</li>
+        <li>Worst times: Friday 3-7 PM, holiday weekends</li>
+        <li>Average wait: 15-45 min</li>
+        <li>Check wait times: borderlineups.com</li>
+      </ul>
+    </div>
+    <div class="checklist-card">
+      <h3>Peace Bridge (Back to USA)</h3>
+      <ul>
+        <li>Toll: ~$6 USD (cash or card)</li>
+        <li>Open 24/7</li>
+        <li>Generally less busy than Rainbow Bridge</li>
+        <li>Average wait: 15-30 min</li>
+        <li>Fort Erie, ON to Buffalo, NY</li>
+        <li>Check wait times: peacebridge.com</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div class="footer">
+  <p>Distances and times are approximate. Verify attractions' hours and admission prices before your trip. Created April 2026.</p>
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo(0, 0);
+}
+function toggleCard(card) {
+  const details = card.querySelector('.stop-details');
+  const chev = card.querySelector('.chevron');
+  const isOpen = details.classList.contains('open');
+  if (isOpen) {
+    details.classList.remove('open');
+    if (chev) chev.classList.remove('open');
+  } else {
+    details.classList.add('open');
+    if (chev) chev.classList.add('open');
+  }
+}
+</script>
+</body>
+</html>
