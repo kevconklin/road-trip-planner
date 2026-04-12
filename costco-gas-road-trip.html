@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Road Trip Fuel Planner — Lawrence, MI to Boston, MA via Canada</title>
+<title>Road Trip Fuel Planner — Lawrence, MI &harr; Boston, MA via Canada</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -11,23 +11,23 @@
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --navy-950: #020617;
-    --navy-900: #0f172a;
-    --navy-800: #1e293b;
-    --navy-700: #334155;
-    --amber-50: #fffbeb;
-    --amber-100: #fef3c7;
-    --sunset-300: #fdba74;
-    --sunset-400: #fb923c;
-    --sunset-500: #f97316;
-    --sunset-600: #ea580c;
-    --green-400: #4ade80;
-    --green-500: #22c55e;
-    --red-400: #f87171;
-    --red-500: #ef4444;
-    --yellow-400: #facc15;
-    --yellow-500: #eab308;
-    --blue-400: #60a5fa;
+    --navy-950: #f8f5f0;
+    --navy-900: #efe9e0;
+    --navy-800: #e2dbd0;
+    --navy-700: #8a8078;
+    --amber-50: #1a1a2e;
+    --amber-100: #3c3225;
+    --sunset-300: #e8874a;
+    --sunset-400: #d97020;
+    --sunset-500: #c45e10;
+    --sunset-600: #a84d08;
+    --green-400: #16a34a;
+    --green-500: #15803d;
+    --red-400: #dc2626;
+    --red-500: #b91c1c;
+    --yellow-400: #ca8a04;
+    --yellow-500: #a16207;
+    --blue-400: #2563eb;
   }
 
   body {
@@ -40,25 +40,25 @@
     position: relative;
   }
 
-  ::selection { background: rgba(249, 115, 22, 0.3); }
+  ::selection { background: rgba(200, 100, 20, 0.2); }
   .font-heading { font-family: 'Outfit', sans-serif; }
 
   /* Background effects */
   .bg-glow {
     position: absolute; top: 0; left: 0; width: 100%; height: 500px;
-    background: rgba(234, 88, 12, 0.08);
+    background: rgba(234, 150, 60, 0.05);
     filter: blur(150px); pointer-events: none; border-radius: 0 0 50% 50%;
   }
   .dot-pattern {
-    position: fixed; inset: 0; pointer-events: none; opacity: 0.02;
-    background-image: radial-gradient(#fef3c7 1px, transparent 1px);
+    position: fixed; inset: 0; pointer-events: none; opacity: 0.04;
+    background-image: radial-gradient(#c4a882 1px, transparent 1px);
     background-size: 40px 40px; z-index: 0;
   }
 
   /* Back link */
   .back-link {
     display: inline-flex; align-items: center; gap: 0.5rem;
-    color: rgba(254, 243, 199, 0.5); text-decoration: none;
+    color: rgba(60, 50, 40, 0.45); text-decoration: none;
     font-size: 0.85rem; padding: 1.5rem 0 0;
     transition: color 0.3s;
   }
@@ -77,15 +77,16 @@
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  .header p { color: rgba(254, 243, 199, 0.6); font-size: 1rem; }
+  .header p { color: rgba(60, 50, 40, 0.55); font-size: 1rem; }
 
   /* Summary bar */
   .summary-bar {
     display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem;
     padding: 1.5rem 1rem; margin-bottom: 2rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 1rem; backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
   }
   .summary-item { text-align: center; min-width: 120px; }
   .summary-item .num {
@@ -93,7 +94,7 @@
     font-size: 1.6rem; font-weight: 700; color: var(--sunset-400);
   }
   .summary-item .label {
-    font-size: 0.72rem; color: rgba(254, 243, 199, 0.4);
+    font-size: 0.72rem; color: rgba(60, 50, 40, 0.45);
     text-transform: uppercase; letter-spacing: 0.8px;
   }
 
@@ -110,23 +111,24 @@
 
   .stop {
     position: relative; margin-bottom: 0;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.08);
     overflow: hidden; transition: all 0.3s ease;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
   }
-  .stop:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(249, 115, 22, 0.2); }
+  .stop:hover { background: rgba(255, 255, 255, 0.85); border-color: rgba(200, 100, 20, 0.2); }
 
   .stop::before {
     content: ''; position: absolute; left: -30px; top: 24px;
     width: 14px; height: 14px; border-radius: 50%;
     background: var(--sunset-500); border: 3px solid var(--navy-950);
-    box-shadow: 0 0 0 2px var(--sunset-500), 0 0 12px rgba(249, 115, 22, 0.3);
+    box-shadow: 0 0 0 2px var(--sunset-500);
     z-index: 1;
   }
-  .stop.canada::before { background: var(--red-400); box-shadow: 0 0 0 2px var(--red-400), 0 0 12px rgba(248, 113, 113, 0.3); }
+  .stop.canada::before { background: var(--red-400); box-shadow: 0 0 0 2px var(--red-400); }
   .stop.start::before, .stop.end::before {
     background: var(--green-400); width: 16px; height: 16px; left: -31px; top: 23px;
-    box-shadow: 0 0 0 2px var(--green-400), 0 0 12px rgba(74, 222, 128, 0.3);
+    box-shadow: 0 0 0 2px var(--green-400);
   }
 
   .stop-header {
@@ -134,7 +136,7 @@
     padding: 1rem 1.2rem; cursor: pointer; user-select: none;
     transition: background 0.2s;
   }
-  .stop-header:hover { background: rgba(255, 255, 255, 0.03); }
+  .stop-header:hover { background: rgba(0, 0, 0, 0.02); }
   .stop-left { display: flex; align-items: center; gap: 0.75rem; flex: 1; }
   .stop-number {
     background: linear-gradient(135deg, var(--sunset-500), var(--sunset-600));
@@ -147,21 +149,21 @@
   .stop.start .stop-number, .stop.end .stop-number { background: linear-gradient(135deg, var(--green-400), var(--green-500)); }
 
   .stop-name { font-weight: 600; font-size: 1rem; color: var(--amber-50); }
-  .stop-location { font-size: 0.82rem; color: rgba(254, 243, 199, 0.45); }
+  .stop-location { font-size: 0.82rem; color: rgba(60, 50, 40, 0.5); }
 
   .stop-badges { display: flex; gap: 0.4rem; flex-shrink: 0; }
   .badge {
     font-size: 0.7rem; padding: 0.2rem 0.55rem; border-radius: 20px;
     font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px;
   }
-  .badge-us { background: rgba(96, 165, 250, 0.15); color: var(--blue-400); }
-  .badge-ca { background: rgba(248, 113, 113, 0.15); color: var(--red-400); }
-  .badge-border { background: rgba(250, 204, 21, 0.15); color: var(--yellow-400); }
-  .badge-fuel { background: rgba(74, 222, 128, 0.15); color: var(--green-400); }
+  .badge-us { background: rgba(37, 99, 235, 0.08); color: var(--blue-400); }
+  .badge-ca { background: rgba(220, 38, 38, 0.08); color: var(--red-400); }
+  .badge-border { background: rgba(202, 138, 4, 0.08); color: var(--yellow-400); }
+  .badge-fuel { background: rgba(22, 163, 74, 0.08); color: var(--green-400); }
 
   .stop-details {
     display: none; padding: 0 1.2rem 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
     animation: fadeIn 0.2s ease;
   }
   .stop-details.open { display: block; }
@@ -172,58 +174,59 @@
     margin-top: 0.8rem;
   }
   .detail-label {
-    font-size: 0.72rem; color: rgba(254, 243, 199, 0.35);
+    font-size: 0.72rem; color: rgba(60, 50, 40, 0.4);
     text-transform: uppercase; letter-spacing: 0.5px;
   }
-  .detail-value { font-size: 0.95rem; font-weight: 500; color: rgba(254, 243, 199, 0.85); }
+  .detail-value { font-size: 0.95rem; font-weight: 500; color: rgba(30, 30, 30, 0.8); }
 
   .tip-box {
-    background: rgba(249, 115, 22, 0.08);
+    background: rgba(200, 100, 20, 0.05);
     border-left: 3px solid var(--sunset-500);
     padding: 0.6rem 0.8rem; border-radius: 0 8px 8px 0;
     margin-top: 0.8rem; font-size: 0.85rem;
-    color: rgba(254, 243, 199, 0.7);
+    color: rgba(60, 50, 40, 0.65);
   }
 
   /* Driving segment */
   .segment {
     position: relative; padding: 0.6rem 0 0.6rem 12px;
-    font-size: 0.82rem; color: rgba(254, 243, 199, 0.35);
+    font-size: 0.82rem; color: rgba(60, 50, 40, 0.4);
     display: flex; align-items: center; gap: 0.5rem;
   }
   .segment .arrow { font-size: 1rem; color: var(--sunset-500); opacity: 0.6; }
-  .segment .dist { font-weight: 600; color: rgba(254, 243, 199, 0.6); }
+  .segment .dist { font-weight: 600; color: rgba(60, 50, 40, 0.6); }
 
   .chevron {
     transition: transform 0.2s; font-size: 0.9rem;
-    color: rgba(254, 243, 199, 0.3);
+    color: rgba(60, 50, 40, 0.3);
   }
   .chevron.open { transform: rotate(90deg); }
 
   /* Border crossing callout */
   .border-callout {
     position: relative;
-    background: rgba(250, 204, 21, 0.05);
-    border: 1px dashed rgba(250, 204, 21, 0.3);
+    background: rgba(202, 138, 4, 0.05);
+    border: 1px dashed rgba(202, 138, 4, 0.3);
     border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 0;
   }
   .border-callout::before {
     content: ''; position: absolute; left: -30px; top: 18px;
     width: 14px; height: 14px; border-radius: 50%;
     background: var(--yellow-400); border: 3px solid var(--navy-950);
-    box-shadow: 0 0 0 2px var(--yellow-400), 0 0 12px rgba(250, 204, 21, 0.3);
+    box-shadow: 0 0 0 2px var(--yellow-400);
     z-index: 1;
   }
   .border-callout h3 { font-size: 0.95rem; margin-bottom: 0.4rem; color: var(--yellow-400); }
-  .border-callout p { font-size: 0.85rem; color: rgba(254, 243, 199, 0.55); }
+  .border-callout p { font-size: 0.85rem; color: rgba(60, 50, 40, 0.55); }
 
   /* Requirements section */
   .requirements {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.6);
     border-radius: 16px; padding: 1.5rem;
     margin-top: 2.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
   }
   .requirements h2 {
     font-family: 'Outfit', sans-serif;
@@ -231,20 +234,57 @@
   }
   .req-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .req-card {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: 10px; padding: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.05);
   }
   .req-card h3 { font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--amber-50); }
-  .req-card ul { font-size: 0.85rem; padding-left: 1.2rem; color: rgba(254, 243, 199, 0.55); }
+  .req-card ul { font-size: 0.85rem; padding-left: 1.2rem; color: rgba(60, 50, 40, 0.6); }
   .req-card li { margin-bottom: 0.25rem; }
 
   .footer-note {
     text-align: center; margin-top: 2.5rem;
-    font-size: 0.8rem; color: rgba(254, 243, 199, 0.25);
+    font-size: 0.8rem; color: rgba(60, 50, 40, 0.35);
   }
   .footer-note a { color: var(--sunset-400); text-decoration: none; }
   .footer-note a:hover { text-decoration: underline; }
+
+  .maps-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    margin-top: 0.8rem; padding: 0.45rem 0.85rem;
+    background: rgba(37, 99, 235, 0.06);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    border-radius: 8px; text-decoration: none;
+    font-size: 0.82rem; font-weight: 500;
+    color: var(--blue-400); transition: all 0.2s;
+  }
+  .maps-link:hover {
+    background: rgba(37, 99, 235, 0.12);
+    border-color: rgba(37, 99, 235, 0.35);
+  }
+  .maps-link svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  /* Direction toggle */
+  .direction-toggle {
+    display: flex; justify-content: center; gap: 0;
+    margin-bottom: 2rem; border-radius: 12px; overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.5);
+  }
+  .direction-btn {
+    flex: 1; padding: 0.75rem 1.2rem; border: none;
+    background: transparent; color: rgba(60, 50, 40, 0.45);
+    font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 600;
+    cursor: pointer; transition: all 0.3s; position: relative;
+  }
+  .direction-btn:first-child { border-right: 1px solid rgba(0, 0, 0, 0.08); }
+  .direction-btn:hover { color: rgba(60, 50, 40, 0.75); background: rgba(0, 0, 0, 0.02); }
+  .direction-btn.active {
+    background: rgba(200, 100, 20, 0.08); color: var(--sunset-400);
+  }
+  .direction-btn .dir-arrow { font-size: 0.85rem; margin: 0 0.25rem; }
+  .route-view { display: none; }
+  .route-view.active { display: block; }
 
   /* Animations */
   .header, .summary-bar { opacity: 0; animation: fadeInUp 0.7s ease-out forwards; }
@@ -272,8 +312,13 @@
 <a href="index.html" class="back-link">&larr; Back to Trip Home</a>
 
 <div class="header">
-  <h1>Lawrence, MI &rarr; Boston, MA via Canada</h1>
+  <h1 id="route-title">Lawrence, MI &rarr; Boston, MA via Canada</h1>
   <p>Costco Gas Station Fuel Stop Planner</p>
+</div>
+
+<div class="direction-toggle">
+  <button class="direction-btn active" onclick="switchDirection('outbound')">Lawrence <span class="dir-arrow">&rarr;</span> Boston</button>
+  <button class="direction-btn" onclick="switchDirection('return')">Boston <span class="dir-arrow">&rarr;</span> Lawrence</button>
 </div>
 
 <div class="summary-bar">
@@ -295,6 +340,7 @@
   </div>
 </div>
 
+<div id="outbound-route" class="route-view active">
 <div class="timeline">
 
   <!-- STOP 1: Lawrence -->
@@ -311,6 +357,7 @@
     </div>
     <div class="stop-details" id="details-0">
       <div class="tip-box">Start with a full tank before hitting the road! The nearest Costco is about 30 minutes away in Kalamazoo.</div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Lawrence+MI" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
     </div>
   </div>
 
@@ -339,6 +386,7 @@
         <div><div class="detail-label">Payment</div><div class="detail-value">Visa + Costco card only</div></div>
       </div>
       <div class="tip-box">Great first fill-up — very close to Lawrence. Top off before the longer stretch to Detroit.</div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Costco+Gas+5100+Century+Ave+Kalamazoo+MI" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
     </div>
   </div>
 
@@ -367,6 +415,7 @@
         <div><div class="detail-label">Near</div><div class="detail-value">I-696 / I-75 interchange</div></div>
       </div>
       <div class="tip-box">Fill up here before crossing into Canada — US gas prices are typically lower than Canadian prices. This is your last US stop before the border!</div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Costco+Gas+30550+Stephenson+Hwy+Madison+Heights+MI" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
     </div>
   </div>
 
@@ -403,6 +452,7 @@
         <div><div class="detail-label">Membership</div><div class="detail-value">US Costco card accepted</div></div>
       </div>
       <div class="tip-box">Your US Costco membership works at Canadian locations. Gas is priced in CAD per litre. Even with conversion, Costco gas in Canada is usually well below other Canadian stations.</div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Costco+Gas+100+Legend+Court+Ancaster+ON+Canada" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
     </div>
   </div>
 
@@ -431,6 +481,7 @@
         <div><div class="detail-label">Currency</div><div class="detail-value">Canadian dollars (CAD)</div></div>
       </div>
       <div class="tip-box">This is east of Toronto right along the 401 corridor — a convenient stop before looping back toward Niagara and the US border.</div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Costco+Gas+1+York+Tech+Dr+Markham+ON+Canada" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
     </div>
   </div>
 
@@ -467,6 +518,7 @@
         <div><div class="detail-label">Important</div><div class="detail-value">Verify open before trip!</div></div>
       </div>
       <div class="tip-box">&#9888;&#65039; This location is expected to open Spring 2026 — confirm it's open before your trip. If not yet open, the next Costco gas is in Rochester (~70 mi ahead).</div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Costco+4230+Ridge+Lea+Rd+Amherst+NY" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
     </div>
   </div>
 
@@ -494,6 +546,7 @@
         <div><div class="detail-label">Near</div><div class="detail-value">I-90 / I-390 interchange</div></div>
         <div><div class="detail-label">Gas Hours (Typical)</div><div class="detail-value">Mon&ndash;Fri 6am&ndash;9:30pm</div></div>
       </div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Costco+Gas+335+Westfall+Rd+Rochester+NY" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
     </div>
   </div>
 
@@ -522,6 +575,7 @@
         <div><div class="detail-label">Gas Hours (Typical)</div><div class="detail-value">Mon&ndash;Fri 6am&ndash;9:30pm</div></div>
       </div>
       <div class="tip-box">Good midpoint if you're splitting the New York stretch into an overnight. Syracuse has plenty of hotels nearby.</div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Costco+Gas+120+Township+Blvd+Camillus+NY" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
     </div>
   </div>
 
@@ -550,6 +604,7 @@
         <div><div class="detail-label">Tip</div><div class="detail-value">Last fill before MA Turnpike</div></div>
       </div>
       <div class="tip-box">Fill up here before the ~180-mile stretch on the Massachusetts Turnpike to Dedham. Verify this location is open before your trip.</div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Costco+Gas+Crossgates+Mall+Western+Ave+Albany+NY" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
     </div>
   </div>
 
@@ -578,6 +633,7 @@
         <div><div class="detail-label">To Boston</div><div class="detail-value">~12 mi / 25 min</div></div>
       </div>
       <div class="tip-box">Just southwest of Boston — your final Costco fill-up! Top off here before heading into the city. Only about 25 min to downtown Boston.</div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Costco+Gas+200+Legacy+Blvd+Dedham+MA" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
     </div>
   </div>
 
@@ -601,10 +657,337 @@
         <div><div class="detail-label">Total Drive Time</div><div class="detail-value">~17 hrs (no stops)</div></div>
       </div>
       <div class="tip-box">Welcome to Boston! Consider the Costco in Danvers (11 Newbury St) north of the city for fuel on your return trip or during your stay.</div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Boston+MA" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
     </div>
   </div>
 
 </div><!-- /timeline -->
+</div><!-- /outbound-route -->
+
+<!-- RETURN ROUTE -->
+<div id="return-route" class="route-view">
+<div class="timeline">
+
+  <!-- RETURN STOP 1: Boston -->
+  <div class="stop start" id="r-stop-0">
+    <div class="stop-header" onclick="toggle('r-0')">
+      <div class="stop-left">
+        <div class="stop-number">A</div>
+        <div>
+          <div class="stop-name">Boston, MA</div>
+          <div class="stop-location">Starting Point</div>
+        </div>
+      </div>
+      <span class="chevron" id="chev-r-0">&#9654;</span>
+    </div>
+    <div class="stop-details" id="details-r-0">
+      <div class="tip-box">Time to head home! Fill up at Dedham Costco just 12 miles southwest before the long haul back.</div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Boston+MA" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
+    </div>
+  </div>
+
+  <div class="segment"><span class="arrow">&darr;</span> <span class="dist">~12 mi</span> &middot; ~25 min via I-95 S</div>
+
+  <!-- RETURN STOP 2: Dedham -->
+  <div class="stop" id="r-stop-1">
+    <div class="stop-header" onclick="toggle('r-1')">
+      <div class="stop-left">
+        <div class="stop-number">1</div>
+        <div>
+          <div class="stop-name">Costco &mdash; Dedham, MA</div>
+          <div class="stop-location">200 Legacy Blvd, Dedham, MA</div>
+        </div>
+      </div>
+      <div class="stop-badges">
+        <span class="badge badge-us">US</span>
+        <span class="badge badge-fuel">Fuel</span>
+      </div>
+    </div>
+    <div class="stop-details" id="details-r-1">
+      <div class="detail-grid">
+        <div><div class="detail-label">From Previous</div><div class="detail-value">~12 mi &middot; ~25 min</div></div>
+        <div><div class="detail-label">Running Total</div><div class="detail-value">~12 mi</div></div>
+        <div><div class="detail-label">Near</div><div class="detail-value">I-95 / Legacy Place shopping</div></div>
+        <div><div class="detail-label">Gas Hours (Typical)</div><div class="detail-value">Mon&ndash;Fri 6am&ndash;9:30pm</div></div>
+      </div>
+      <div class="tip-box">First fill-up heading home. Top off here &mdash; the next Costco gas is ~180 miles away in Albany.</div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Costco+Gas+200+Legacy+Blvd+Dedham+MA" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
+    </div>
+  </div>
+
+  <div class="segment"><span class="arrow">&darr;</span> <span class="dist">~180 mi</span> &middot; ~3 hrs via I-90 W (Mass Turnpike)</div>
+
+  <!-- RETURN STOP 3: Albany -->
+  <div class="stop" id="r-stop-2">
+    <div class="stop-header" onclick="toggle('r-2')">
+      <div class="stop-left">
+        <div class="stop-number">2</div>
+        <div>
+          <div class="stop-name">Costco &mdash; Westmere/Albany, NY</div>
+          <div class="stop-location">Near Crossgates Mall, Western Ave, Albany, NY</div>
+        </div>
+      </div>
+      <div class="stop-badges">
+        <span class="badge badge-us">US</span>
+        <span class="badge badge-fuel">Fuel</span>
+      </div>
+    </div>
+    <div class="stop-details" id="details-r-2">
+      <div class="detail-grid">
+        <div><div class="detail-label">From Previous</div><div class="detail-value">~180 mi &middot; ~3 hrs</div></div>
+        <div><div class="detail-label">Running Total</div><div class="detail-value">~192 mi</div></div>
+        <div><div class="detail-label">MA Turnpike Tolls</div><div class="detail-value">Tolls apply on I-90</div></div>
+        <div><div class="detail-label">Gas Hours (Typical)</div><div class="detail-value">Mon&ndash;Fri 6am&ndash;9:30pm</div></div>
+      </div>
+      <div class="tip-box">Long stretch from Dedham &mdash; fill up here. Verify this location is open before your trip.</div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Costco+Gas+Crossgates+Mall+Western+Ave+Albany+NY" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
+    </div>
+  </div>
+
+  <div class="segment"><span class="arrow">&darr;</span> <span class="dist">141 mi</span> &middot; ~2 hr 10 min via I-90 W (NY Thruway)</div>
+
+  <!-- RETURN STOP 4: Syracuse -->
+  <div class="stop" id="r-stop-3">
+    <div class="stop-header" onclick="toggle('r-3')">
+      <div class="stop-left">
+        <div class="stop-number">3</div>
+        <div>
+          <div class="stop-name">Costco &mdash; Camillus, NY (Syracuse)</div>
+          <div class="stop-location">120 Township Blvd, Camillus, NY</div>
+        </div>
+      </div>
+      <div class="stop-badges">
+        <span class="badge badge-us">US</span>
+        <span class="badge badge-fuel">Fuel</span>
+      </div>
+    </div>
+    <div class="stop-details" id="details-r-3">
+      <div class="detail-grid">
+        <div><div class="detail-label">From Previous</div><div class="detail-value">141 mi &middot; 2 hr 10 min</div></div>
+        <div><div class="detail-label">Running Total</div><div class="detail-value">~333 mi</div></div>
+        <div><div class="detail-label">Near</div><div class="detail-value">Just off I-90 / Hwy 5</div></div>
+        <div><div class="detail-label">Gas Hours (Typical)</div><div class="detail-value">Mon&ndash;Fri 6am&ndash;9:30pm</div></div>
+      </div>
+      <div class="tip-box">Good overnight stop if you're splitting the drive. Syracuse has plenty of hotels nearby.</div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Costco+Gas+120+Township+Blvd+Camillus+NY" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
+    </div>
+  </div>
+
+  <div class="segment"><span class="arrow">&darr;</span> <span class="dist">68 mi</span> &middot; ~1 hr 5 min via I-90 W</div>
+
+  <!-- RETURN STOP 5: Rochester -->
+  <div class="stop" id="r-stop-4">
+    <div class="stop-header" onclick="toggle('r-4')">
+      <div class="stop-left">
+        <div class="stop-number">4</div>
+        <div>
+          <div class="stop-name">Costco &mdash; Rochester, NY</div>
+          <div class="stop-location">335 Westfall Rd, Rochester, NY</div>
+        </div>
+      </div>
+      <div class="stop-badges">
+        <span class="badge badge-us">US</span>
+        <span class="badge badge-fuel">Fuel</span>
+      </div>
+    </div>
+    <div class="stop-details" id="details-r-4">
+      <div class="detail-grid">
+        <div><div class="detail-label">From Previous</div><div class="detail-value">68 mi &middot; 1 hr 5 min</div></div>
+        <div><div class="detail-label">Running Total</div><div class="detail-value">~401 mi</div></div>
+        <div><div class="detail-label">Near</div><div class="detail-value">I-90 / I-390 interchange</div></div>
+        <div><div class="detail-label">Gas Hours (Typical)</div><div class="detail-value">Mon&ndash;Fri 6am&ndash;9:30pm</div></div>
+      </div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Costco+Gas+335+Westfall+Rd+Rochester+NY" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
+    </div>
+  </div>
+
+  <div class="segment"><span class="arrow">&darr;</span> <span class="dist">69 mi</span> &middot; ~1 hr 10 min via I-90 W</div>
+
+  <!-- RETURN STOP 6: Buffalo/Amherst -->
+  <div class="stop" id="r-stop-5">
+    <div class="stop-header" onclick="toggle('r-5')">
+      <div class="stop-left">
+        <div class="stop-number">5</div>
+        <div>
+          <div class="stop-name">Costco &mdash; Amherst, NY (Buffalo area)</div>
+          <div class="stop-location">4230 Ridge Lea Rd, Amherst, NY</div>
+        </div>
+      </div>
+      <div class="stop-badges">
+        <span class="badge badge-us">US</span>
+        <span class="badge badge-fuel">Fuel</span>
+      </div>
+    </div>
+    <div class="stop-details" id="details-r-5">
+      <div class="detail-grid">
+        <div><div class="detail-label">From Previous</div><div class="detail-value">69 mi &middot; 1 hr 10 min</div></div>
+        <div><div class="detail-label">Running Total</div><div class="detail-value">~470 mi</div></div>
+        <div><div class="detail-label">Status</div><div class="detail-value">Opening Spring 2026</div></div>
+        <div><div class="detail-label">Important</div><div class="detail-value">Verify open before trip!</div></div>
+      </div>
+      <div class="tip-box">&#9888;&#65039; This location is expected to open Spring 2026 &mdash; confirm it's open before your trip. Fill up here before crossing into Canada &mdash; US gas is cheaper!</div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Costco+4230+Ridge+Lea+Rd+Amherst+NY" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
+    </div>
+  </div>
+
+  <div class="segment"><span class="arrow">&darr;</span> <span class="dist">~15 mi</span> &middot; ~20 min to border (+ crossing time)</div>
+
+  <!-- RETURN BORDER 1 -->
+  <div class="border-callout">
+    <h3>Border Crossing: Peace Bridge (Buffalo, NY &rarr; Fort Erie, ON)</h3>
+    <p>Toll: ~$6 USD. Allow 30&ndash;60 min for processing. Have passports/passport cards ready. You&rsquo;ll need to declare any items you&rsquo;re bringing into Canada.</p>
+  </div>
+
+  <div class="segment"><span class="arrow">&darr;</span> <span class="dist">~98 mi</span> &middot; ~1 hr 45 min via QEW N / ON-401 W</div>
+
+  <!-- RETURN STOP 7: Markham -->
+  <div class="stop canada" id="r-stop-6">
+    <div class="stop-header" onclick="toggle('r-6')">
+      <div class="stop-left">
+        <div class="stop-number">6</div>
+        <div>
+          <div class="stop-name">Costco &mdash; Markham, ON</div>
+          <div class="stop-location">1 York Tech Dr, Markham, ON</div>
+        </div>
+      </div>
+      <div class="stop-badges">
+        <span class="badge badge-ca">Canada</span>
+        <span class="badge badge-fuel">Fuel</span>
+      </div>
+    </div>
+    <div class="stop-details" id="details-r-6">
+      <div class="detail-grid">
+        <div><div class="detail-label">From Previous</div><div class="detail-value">~98 mi &middot; ~1 hr 45 min</div></div>
+        <div><div class="detail-label">Running Total</div><div class="detail-value">~583 mi</div></div>
+        <div><div class="detail-label">Currency</div><div class="detail-value">Canadian dollars (CAD)</div></div>
+        <div><div class="detail-label">Membership</div><div class="detail-value">US Costco card accepted</div></div>
+      </div>
+      <div class="tip-box">Your US Costco membership works at Canadian locations. Gas is priced in CAD per litre. East of Toronto right along the 401 corridor.</div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Costco+Gas+1+York+Tech+Dr+Markham+ON+Canada" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
+    </div>
+  </div>
+
+  <div class="segment"><span class="arrow">&darr;</span> <span class="dist">71 mi</span> &middot; ~1 hr 10 min via ON-401 W / ON-403 W</div>
+
+  <!-- RETURN STOP 8: Hamilton -->
+  <div class="stop canada" id="r-stop-7">
+    <div class="stop-header" onclick="toggle('r-7')">
+      <div class="stop-left">
+        <div class="stop-number">7</div>
+        <div>
+          <div class="stop-name">Costco &mdash; Hamilton/Ancaster, ON</div>
+          <div class="stop-location">100 Legend Court, Ancaster, ON</div>
+        </div>
+      </div>
+      <div class="stop-badges">
+        <span class="badge badge-ca">Canada</span>
+        <span class="badge badge-fuel">Fuel</span>
+      </div>
+    </div>
+    <div class="stop-details" id="details-r-7">
+      <div class="detail-grid">
+        <div><div class="detail-label">From Previous</div><div class="detail-value">71 mi &middot; 1 hr 10 min</div></div>
+        <div><div class="detail-label">Running Total</div><div class="detail-value">~654 mi</div></div>
+        <div><div class="detail-label">Currency</div><div class="detail-value">Canadian dollars (CAD)</div></div>
+        <div><div class="detail-label">Membership</div><div class="detail-value">US Costco card accepted</div></div>
+      </div>
+      <div class="tip-box">Last Canadian Costco stop. Fill up here &mdash; the next stop is across the border in Michigan.</div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Costco+Gas+100+Legend+Court+Ancaster+ON+Canada" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
+    </div>
+  </div>
+
+  <div class="segment"><span class="arrow">&darr;</span> <span class="dist">~170 mi</span> &middot; ~2 hr 45 min via ON-401 W to border (+ crossing time)</div>
+
+  <!-- RETURN BORDER 2 -->
+  <div class="border-callout">
+    <h3>Border Crossing: Ambassador Bridge (Windsor, ON &rarr; Detroit, MI)</h3>
+    <p>Toll: ~$5 USD. Allow 30&ndash;90 min for processing depending on traffic. Keep all receipts from Canadian purchases &mdash; you must declare items at US customs. Peak times: Sunday evenings and holiday weekends.</p>
+  </div>
+
+  <div class="segment"><span class="arrow">&darr;</span> <span class="dist">~45 mi</span> &middot; ~40 min to Costco</div>
+
+  <!-- RETURN STOP 9: Madison Heights -->
+  <div class="stop" id="r-stop-8">
+    <div class="stop-header" onclick="toggle('r-8')">
+      <div class="stop-left">
+        <div class="stop-number">8</div>
+        <div>
+          <div class="stop-name">Costco &mdash; Madison Heights, MI</div>
+          <div class="stop-location">30550 Stephenson Hwy, Madison Heights, MI</div>
+        </div>
+      </div>
+      <div class="stop-badges">
+        <span class="badge badge-us">US</span>
+        <span class="badge badge-fuel">Fuel</span>
+      </div>
+    </div>
+    <div class="stop-details" id="details-r-8">
+      <div class="detail-grid">
+        <div><div class="detail-label">From Previous</div><div class="detail-value">~45 mi &middot; ~40 min</div></div>
+        <div><div class="detail-label">Running Total</div><div class="detail-value">~869 mi</div></div>
+        <div><div class="detail-label">Gas Hours (Typical)</div><div class="detail-value">Mon&ndash;Fri 6am&ndash;9:30pm</div></div>
+        <div><div class="detail-label">Near</div><div class="detail-value">I-696 / I-75 interchange</div></div>
+      </div>
+      <div class="tip-box">Welcome back to the US! Fill up at US prices &mdash; much cheaper than Canada. About 2.5 hours left to Lawrence.</div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Costco+Gas+30550+Stephenson+Hwy+Madison+Heights+MI" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
+    </div>
+  </div>
+
+  <div class="segment"><span class="arrow">&darr;</span> <span class="dist">150 mi</span> &middot; ~2 hr 15 min via I-94 W</div>
+
+  <!-- RETURN STOP 10: Kalamazoo -->
+  <div class="stop" id="r-stop-9">
+    <div class="stop-header" onclick="toggle('r-9')">
+      <div class="stop-left">
+        <div class="stop-number">9</div>
+        <div>
+          <div class="stop-name">Costco &mdash; Kalamazoo, MI</div>
+          <div class="stop-location">5100 Century Ave, Kalamazoo, MI</div>
+        </div>
+      </div>
+      <div class="stop-badges">
+        <span class="badge badge-us">US</span>
+        <span class="badge badge-fuel">Fuel</span>
+      </div>
+    </div>
+    <div class="stop-details" id="details-r-9">
+      <div class="detail-grid">
+        <div><div class="detail-label">From Previous</div><div class="detail-value">150 mi &middot; 2 hr 15 min</div></div>
+        <div><div class="detail-label">Running Total</div><div class="detail-value">~1,019 mi</div></div>
+        <div><div class="detail-label">Gas Hours (Typical)</div><div class="detail-value">Mon&ndash;Fri 6am&ndash;9:30pm</div></div>
+        <div><div class="detail-label">Payment</div><div class="detail-value">Visa + Costco card only</div></div>
+      </div>
+      <div class="tip-box">Last Costco fill-up! Only about 30 minutes from home. Top off here for the final stretch.</div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Costco+Gas+5100+Century+Ave+Kalamazoo+MI" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
+    </div>
+  </div>
+
+  <div class="segment"><span class="arrow">&darr;</span> <span class="dist">29 mi</span> &middot; ~31 min via I-94 W</div>
+
+  <!-- RETURN STOP 11: Lawrence -->
+  <div class="stop end" id="r-stop-10">
+    <div class="stop-header" onclick="toggle('r-10')">
+      <div class="stop-left">
+        <div class="stop-number">B</div>
+        <div>
+          <div class="stop-name">Lawrence, MI</div>
+          <div class="stop-location">Destination &mdash; Welcome home!</div>
+        </div>
+      </div>
+      <span class="chevron" id="chev-r-10">&#9654;</span>
+    </div>
+    <div class="stop-details" id="details-r-10">
+      <div class="detail-grid">
+        <div><div class="detail-label">Total Distance</div><div class="detail-value">~1,048 mi</div></div>
+        <div><div class="detail-label">Total Drive Time</div><div class="detail-value">~17 hrs (no stops)</div></div>
+      </div>
+      <div class="tip-box">You made it home! Total round trip: ~2,096 miles. Time to unpack and rest.</div>
+      <a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Lawrence+MI" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open in Google Maps</a>
+    </div>
+  </div>
+
+</div><!-- /timeline -->
+</div><!-- /return-route -->
 
 <!-- Requirements Section -->
 <div class="requirements">
@@ -659,15 +1042,43 @@
 
 <script>
 function toggle(i) {
-  const details = document.getElementById('details-' + i);
-  const chev = document.getElementById('chev-' + i);
-  const isOpen = details.classList.contains('open');
-  document.querySelectorAll('.stop-details').forEach(d => d.classList.remove('open'));
-  document.querySelectorAll('.chevron').forEach(c => c.classList.remove('open'));
+  var activeRoute = document.querySelector('.route-view.active');
+  var details = document.getElementById('details-' + i);
+  var chev = document.getElementById('chev-' + i);
+  var isOpen = details.classList.contains('open');
+  activeRoute.querySelectorAll('.stop-details').forEach(function(d) { d.classList.remove('open'); });
+  activeRoute.querySelectorAll('.chevron').forEach(function(c) { c.classList.remove('open'); });
   if (!isOpen) {
     details.classList.add('open');
     if (chev) chev.classList.add('open');
   }
+}
+
+function switchDirection(dir) {
+  var outbound = document.getElementById('outbound-route');
+  var returnRoute = document.getElementById('return-route');
+  var title = document.getElementById('route-title');
+  var btns = document.querySelectorAll('.direction-btn');
+
+  // Close any open stops
+  document.querySelectorAll('.stop-details').forEach(function(d) { d.classList.remove('open'); });
+  document.querySelectorAll('.chevron').forEach(function(c) { c.classList.remove('open'); });
+
+  if (dir === 'return') {
+    outbound.classList.remove('active');
+    returnRoute.classList.add('active');
+    title.innerHTML = 'Boston, MA \u2192 Lawrence, MI via Canada';
+    btns[0].classList.remove('active');
+    btns[1].classList.add('active');
+  } else {
+    returnRoute.classList.remove('active');
+    outbound.classList.add('active');
+    title.innerHTML = 'Lawrence, MI \u2192 Boston, MA via Canada';
+    btns[1].classList.remove('active');
+    btns[0].classList.add('active');
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
 </body>
