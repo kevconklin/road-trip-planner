@@ -11,15 +11,15 @@
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --navy-950: #020617;
-    --amber-50: #fffbeb;
-    --amber-100-60: rgba(254, 243, 199, 0.6);
-    --amber-100-30: rgba(254, 243, 199, 0.3);
-    --amber-100-20: rgba(254, 243, 199, 0.2);
-    --sunset-300: #fdba74;
-    --sunset-400: #fb923c;
-    --sunset-500: #f97316;
-    --sunset-600: #ea580c;
+    --navy-950: #f8f5f0;
+    --amber-50: #1a1a2e;
+    --amber-100-60: rgba(60, 50, 40, 0.6);
+    --amber-100-30: rgba(60, 50, 40, 0.3);
+    --amber-100-20: rgba(60, 50, 40, 0.2);
+    --sunset-300: #e8874a;
+    --sunset-400: #d97020;
+    --sunset-500: #c45e10;
+    --sunset-600: #a84d08;
   }
 
   body {
@@ -31,14 +31,14 @@
     position: relative;
   }
 
-  ::selection { background: rgba(249, 115, 22, 0.3); }
+  ::selection { background: rgba(200, 100, 20, 0.2); }
 
   .font-heading { font-family: 'Outfit', sans-serif; }
 
   /* Global background glow */
   .bg-glow {
     position: absolute; top: 0; left: 0; width: 100%; height: 600px;
-    background: rgba(234, 88, 12, 0.1);
+    background: rgba(234, 150, 60, 0.06);
     filter: blur(150px);
     pointer-events: none;
     border-radius: 0 0 50% 50%;
@@ -48,8 +48,8 @@
   .dot-pattern {
     position: absolute; inset: 0;
     pointer-events: none;
-    opacity: 0.02;
-    background-image: radial-gradient(#fef3c7 1px, transparent 1px);
+    opacity: 0.04;
+    background-image: radial-gradient(#c4a882 1px, transparent 1px);
     background-size: 40px 40px;
   }
 
@@ -78,8 +78,8 @@
     display: inline-flex; align-items: center; gap: 0.5rem;
     padding: 0.625rem 1.25rem;
     border-radius: 9999px;
-    background: rgba(249, 115, 22, 0.1);
-    border: 1px solid rgba(249, 115, 22, 0.2);
+    background: rgba(200, 100, 20, 0.08);
+    border: 1px solid rgba(200, 100, 20, 0.2);
     color: var(--sunset-400);
     font-weight: 500; font-size: 0.75rem;
     letter-spacing: 0.15em; text-transform: uppercase;
@@ -110,15 +110,15 @@
 
   .hero .subtitle {
     font-size: clamp(1.1rem, 3vw, 1.75rem);
-    color: rgba(254, 243, 199, 0.7);
+    color: rgba(60, 50, 40, 0.6);
     font-weight: 300;
     display: flex; flex-wrap: wrap;
     align-items: center; justify-content: center; gap: 0.75rem;
     opacity: 0; animation: fadeInUp 0.7s ease-out 0.3s forwards;
   }
 
-  .subtitle .arrow { color: rgba(249, 115, 22, 0.7); }
-  .subtitle .via { color: rgba(249, 115, 22, 0.4); font-style: italic; font-size: 0.85em; }
+  .subtitle .arrow { color: rgba(200, 100, 20, 0.7); }
+  .subtitle .via { color: rgba(200, 100, 20, 0.45); font-style: italic; font-size: 0.85em; }
 
   /* ---- Cards Grid ---- */
   .cards-grid {
@@ -143,7 +143,7 @@
 
   .card-glow {
     position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(249, 115, 22, 0.2), transparent);
+    background: linear-gradient(135deg, rgba(200, 100, 20, 0.1), transparent);
     border-radius: 1.5rem;
     filter: blur(20px);
     opacity: 0;
@@ -159,12 +159,13 @@
     position: relative; display: block; height: 100%;
     padding: 2rem 2rem;
     border-radius: 1.5rem;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     text-decoration: none; color: inherit;
     transition: all 0.5s ease;
     overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   }
 
   @media (min-width: 768px) {
@@ -172,9 +173,10 @@
   }
 
   .card:hover {
-    border-color: rgba(249, 115, 22, 0.3);
-    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(200, 100, 20, 0.25);
+    background: rgba(255, 255, 255, 0.8);
     transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
   }
 
   .card-accent {
@@ -188,16 +190,15 @@
   .card-icon {
     width: 4rem; height: 4rem;
     border-radius: 1rem;
-    background: rgba(249, 115, 22, 0.1);
-    border: 1px solid rgba(249, 115, 22, 0.2);
+    background: rgba(200, 100, 20, 0.08);
+    border: 1px solid rgba(200, 100, 20, 0.15);
     display: flex; align-items: center; justify-content: center;
     margin-bottom: 2rem;
     transition: all 0.5s ease;
-    box-shadow: inset 0 1px 4px rgba(251, 146, 60, 0.1);
   }
 
   .card:hover .card-icon {
-    background: rgba(249, 115, 22, 0.2);
+    background: rgba(200, 100, 20, 0.15);
     transform: scale(1.1);
   }
 
@@ -213,7 +214,7 @@
 
   @media (min-width: 768px) { .card h3 { font-size: 1.75rem; } }
 
-  .card:hover h3 { color: #ffffff; }
+  .card:hover h3 { color: #111; }
 
   .card p {
     color: var(--amber-100-60);
@@ -311,8 +312,6 @@
           <span>Lawrence, MI</span>
           <span class="arrow">&rarr;</span>
           <span>Boston, MA</span>
-          <span class="via">via</span>
-          <span>Canada</span>
         </p>
       </div>
     </section>
@@ -327,7 +326,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="5" y2="22"/><line x1="19" y1="22" x2="21" y2="22"/><path d="M5 22V4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v18"/><path d="M15 10h4a2 2 0 0 1 2 2v10"/><path d="M10 6h0"/><path d="M10 10h0"/><path d="M10 14h0"/></svg>
           </div>
           <h3>Costco Fuel Stop Planner</h3>
-          <p>10 Costco gas stations mapped along the route with distances, drive times, and border crossing info.</p>
+          <p>Costco gas stations mapped along the route with distances, drive times, and fuel stop tips.</p>
         </a>
       </div>
 
@@ -339,7 +338,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
           </div>
           <h3>Family Trip Guide</h3>
-          <p>Day-by-day itinerary, packing checklist, car entertainment ideas, and border crossing tips for the kids.</p>
+          <p>Day-by-day itinerary, packing checklist, and car entertainment ideas for the kids.</p>
         </a>
       </div>
     </div>
